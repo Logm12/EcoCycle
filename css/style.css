@@ -542,3 +542,8 @@ section {
     margin-top: 40px;
     font-size: 0.9rem;
 }
+.logo img {
+    max-height: 100px;
+    width: auto;     
+    display: block;   
+}
