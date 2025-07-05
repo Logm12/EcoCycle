@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Địa Điểm Gần Đây - Ecocycle</title>
+    <!-- CSS chung cho toàn trang (header, footer) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS dành riêng cho trang địa điểm -->
+    <link rel="stylesheet" href="diadiem.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- THƯ VIỆN BẢN ĐỒ LEAFLET.JS (BẮT BUỘC) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+</head>
+<body>
+
+    <!-- ==================== HEADER (GIỮ NGUYÊN) ==================== -->
+    <header id="main-header">
+        <div class="header-top">
+            <div class="container">
+                <span><i class="fa-solid fa-phone"></i> 0337628746</span>
+                <span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
+                <span class="spacer"></span>
+                <span>Tiền tệ</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo"><h1>ECOCYCLE</h1><p>Giải pháp phế liệu</p></a>
+                <div class="search-bar"><input type="text" placeholder="Tìm kiếm phế liệu..."><button><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                <div class="user-actions"><a href="#"><i class="fa-solid fa-shopping-cart"></i> 0 ₫</a><a href="#"><i class="fa-solid fa-user"></i></a></div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
+                    <li><a href="diadiem.html" class="active"><i class="fa-solid fa-map-marker-alt"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
+                    <li class="dropdown"><a href="#"><i class="fa-solid fa-tag"></i> ĐĂNG BÁN <i class="fa-solid fa-caret-down"></i></a><ul class="dropdown-menu"><li><a href="#">CHAI NHỰA</a></li><li><a href="#">SẮT VỤN</a></li><li><a href="#">ĐỒNG</a></li><li><a href="#">DÂY ĐIỆN</a></li><li><a href="#">PIN</a></li><li><a href="#">QUẦN ÁO</a></li></ul></li>
+                    <li><a href="#"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero-locations">
+            <div class="container">
+                <h1>Tái Chế Dễ Dàng, Vì Một Việt Nam Xanh</h1>
+                <p>Tìm ngay điểm thu mua hoặc bán phế liệu gần bạn nhất!</p>
+                <a href="#search-section" class="btn">Bắt đầu tìm kiếm <i class="fa-solid fa-arrow-down"></i></a>
+            </div>
+        </section>
+
+        <!-- ==================== SEARCH & FILTER BLOCK ==================== -->
+        <section id="search-section" class="search-filter-section">
+            <div class="container">
+                <div class="main-search-bar">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <input type="text" id="address-input" placeholder="Nhập địa chỉ, thành phố, hoặc quận/huyện của bạn...">
+                    <button id="gps-button" class="btn-gps"><i class="fa-solid fa-location-crosshairs"></i> Tìm gần tôi</button>
+                </div>
+                <div class="advanced-filters">
+                    <div class="filter-group">
+                        <label for="scrap-type-filter">Loại phế liệu:</label>
+                        <select id="scrap-type-filter">
+                            <option value="all">Tất cả</option>
+                            <option value="metal">Kim loại</option>
+                            <option value="paper">Giấy, Carton</option>
+                            <option value="plastic">Nhựa, Chai lọ</option>
+                            <option value="electronics">Đồ điện tử</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="distance-filter">Khoảng cách:</label>
+                        <select id="distance-filter">
+                            <option value="1">1 km</option>
+                            <option value="3">3 km</option>
+                            <option value="5" selected>5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="9999">Toàn bộ</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-filter">Sắp xếp:</label>
+                        <select id="sort-filter">
+                            <option value="distance">Gần nhất</option>
+                            <option value="rating">Xếp hạng cao nhất</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MAP & RESULTS AREA ==================== -->
+        <section class="results-section">
+            <div class="map-results-wrapper">
+                <!-- Bản đồ tương tác -->
+                <div id="map-container">
+                    <!-- Bản đồ Leaflet sẽ được chèn vào đây -->
+                </div>
+
+                <!-- Danh sách kết quả -->
+                <div id="results-list-container">
+                    <div id="results-list">
+                        <!-- Kết quả tìm kiếm sẽ được chèn vào đây bằng JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER (GIỮ NGUYÊN) ==================== -->
+    <footer class="site-footer">
+        <div class="container"><div class="footer-col"><div class="footer-logo-area"><img id="footer-logo" src="https://i.imgur.com/J4j2kYw.png" alt="Logo Phế Liệu"></div><p>Với sứ mệnh tạo ra một giải pháp xanh và phát triển bền vững, chúng tôi phát triển sàn thương mại này để tối ưu giải pháp cho cá nhân và doanh nghiệp.</p></div><div class="footer-col"><h4>Phế liệu thu mua</h4><ul><li><a href="#">Tái chế chai nhựa</a></li><li><a href="#">Tái chế lon nước</a></li><li><a href="#">Sử dụng quần áo cũ</a></li><li><a href="#">Quyên góp ủng hộ</a></li><li><a href="#">Tái chế giấy vụn</a></li><li><a href="#">Tái chế bìa carton</a></li></ul></div><div class="footer-col"><h4>Về chúng tôi</h4><ul><li><a href="#">Giới thiệu ECOCYCLE</a></li><li><a href="#">Liên hệ tổ chức</a></li><li><a href="#">Điều khoản sử dụng</a></li><li><a href="#">Chính sách bảo mật</a></li><li><a href="#">Câu hỏi thường gặp</a></li></ul></div><div class="footer-col"><h4>Đăng ký nhận bản tin</h4><p>Đăng ký nhận bản tin về khuyến mãi, sự kiện và thông tin cập nhật</p><form class="newsletter-form"><input type="email" placeholder="Email"><button type="submit" class="btn">ĐĂNG KÝ</button></form></div></div><div class="footer-bottom"><p>© 2025 Ecocycle - All rights reserved.</p></div>
+    </footer>
+
+    <!-- JavaScript chung cho toàn trang -->
+    <script src="script.js"></script>
+    <!-- THƯ VIỆN BẢN ĐỒ LEAFLET.JS (BẮT BUỘC) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <!-- JavaScript dành riêng cho bản đồ và tìm kiếm -->
+    <script src="map.js"></script>
+</body>
+</html>
