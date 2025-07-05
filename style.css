@@ -500,16 +500,8 @@ section {
     padding: 10px;
     border-radius: 8px;
 }
-.btn-upload {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
+
+
 .newsletter-form input {
     width: 100%;
     padding: 10px;
