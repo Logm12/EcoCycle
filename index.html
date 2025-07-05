@@ -3,268 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECOCYCLE - MỌI THỨ ĐỀU CÓ GIÁ TRỊ </title>
-    <link rel="stylesheet" href="style.css">
+    <title>ECOCYCLE - MỌI THỨ ĐỀU CÓ GIÁ TRỊ</title>
+    
+    <!-- Đường dẫn đã được cập nhật tới thư mục css/ -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<!-- ==================== HEADER (PHIÊN BẢN MỚI) ==================== -->
-<header id="main-header">
-    <div class="header-top">
-        <div class="container">
-            <span><i class="fa-solid fa-phone"></i> 0337628746</span>
-            <span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
-            <span class="spacer"></span>
-            <span>Tiền tệ</span>
+    <!-- Vị trí đặt header: JavaScript sẽ tự động tải templates/header.html vào đây -->
+    <div id="header-placeholder"></div>
+
+    <!-- MAIN CONTENT: Chỉ chứa nội dung riêng của trang chủ -->
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>THU MUA PHẾ LIỆU GIÁ CAO</h2>
+                    <h1>UY TÍN - CHUYÊN NGHIỆP</h1>
+                    <p>Chúng tôi cung cấp dịch vụ mua bán nguyên liệu thứ cấp tận tâm, tiện lợi, tận dụng từ giá trị nhỏ nhất.</p>
+                    <a href="#" class="btn">Liên hệ ngay <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CATEGORIES SECTION ==================== -->
+        <section class="categories">
+            <div class="container">
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Chai+Nhựa" alt="Chai Nhựa">
+                    <p>CHAI NHỰA</p>
+                </div>
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Sắt+Vụn" alt="Sắt Vụn">
+                    <p>SẮT VỤN</p>
+                </div>
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Đồng" alt="Đồng">
+                    <p>ĐỒNG</p>
+                </div>
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Dây+Điện" alt="Dây Điện">
+                    <p>DÂY ĐIỆN</p>
+                </div>
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Pin" alt="Pin">
+                    <p>PIN</p>
+                </div>
+                <div class="category-item">
+                    <img src="https://via.placeholder.com/100x100.png?text=Quần+Áo" alt="Quần Áo">
+                    <p>QUẦN ÁO</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FEATURED PRODUCTS ==================== -->
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title"><span>BẢNG GIÁ NỔI BẬT</span></h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Sắt+Đặc" alt="Sắt Đặc">
+                        <div class="product-info">
+                            <h3>Sắt Đặc</h3>
+                            <p>10.000đ - 15.000đ / kg</p>
+                        </div>
+                        <div class="discount-badge">-10%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Đồng+Vàng" alt="Đồng Vàng">
+                        <div class="product-info">
+                            <h3>Đồng Vàng</h3>
+                            <p>120.000đ - 150.000đ / kg</p>
+                        </div>
+                        <div class="discount-badge">-5%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Nhôm+Lon" alt="Nhôm Lon">
+                        <div class="product-info">
+                            <h3>Nhôm Lon</h3>
+                            <p>25.000đ - 30.000đ / kg</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Giấy+Carton" alt="Giấy Carton">
+                        <div class="product-info">
+                            <h3>Giấy Carton</h3>
+                            <p>3.000đ - 5.000đ / kg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- ==================== LATEST POSTS ==================== -->
+<section class="latest-posts">
+    <div class="container">
+        <h2 class="section-title"><span>TIN ĐĂNG MỚI</span></h2>
+        <div id="posts-grid" class="product-grid">
+            <!-- Tin đăng từ localStorage sẽ được chèn vào đây -->
         </div>
     </div>
-    <div class="header-main">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <h1>ECOCYCLE</h1>
-                <p>Giải pháp phế liệu</p>
-            </a>
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm phế liệu...">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <div class="user-actions">
-                <a href="#" class="btn btn-post">
-                    <i class="fa-solid fa-plus"></i> Đăng bán
-                </a>
-                <a href="#" class="cart-link">
-                    <i class="fa-solid fa-shopping-cart"></i> 0 ₫
-                </a>
-                <div id="auth-status">
-                    <a href="#">Đăng nhập</a> / <a href="#">Đăng ký</a>
+</section>
+        <!-- ==================== SERVICES SECTION ==================== -->
+        <section class="services">
+            <div class="container">
+                <div class="service-intro">
+                    <h2>Vì một môi trường xanh hơn</h2>
+                    <p>Tham khảo các dịch vụ của chúng tôi và cùng chung tay bảo vệ môi trường.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <nav class="main-nav">
-        <div class="container">
-            <ul>
-                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
-                <li><a href="diadiem.html"><i class="fa-solid fa-map-marker-alt"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
-                <li class="dropdown">
-                    <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">CHAI NHỰA</a></li>
-                        <li><a href="#">SẮT VỤN</a></li>
-                        <li><a href="#">ĐỒNG</a></li>
-                        <li><a href="#">DÂY ĐIỆN</a></li>
-                        <li><a href="#">PIN</a></li>
-                        <li><a href="#">QUẦN ÁO</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2>THU MUA PHẾ LIỆU GIÁ CAO</h2>
-                <h1>UY TÍN - CHUYÊN NGHIỆP</h1>
-                <p>Chúng tôi cung cấp dịch vụ mua bán nguyên liệu thứ cấp tận tâm, tiện lợi,tận dụng từ giá trị nhỏ nhất.</p>
-                <a href="#" class="btn">Liên hệ ngay <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <section class="categories">
-        <div class="container">
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Chai+Nhựa" alt="Chai Nhựa">
-                <p>CHAI NHỰA</p>
-            </div>
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Sắt+Vụn" alt="Sắt Vụn">
-                <p>SẮT VỤN</p>
-            </div>
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Đồng" alt="Đồng">
-                <p>ĐỒNG</p>
-            </div>
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Dây+Điện" alt="Dây Điện">
-                <p>DÂY ĐIỆN</p>
-            </div>
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Pin" alt="Pin">
-                <p>PIN</p>
-            </div>
-            <div class="category-item">
-                <img src="https://via.placeholder.com/100x100.png?text=Quần+Áo" alt="Quần Áo">
-                <p>QUẦN ÁO</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== FEATURED PRODUCTS ==================== -->
-    <section class="featured-products">
-        <div class="container">
-            <h2 class="section-title"><span>BẢNG GIÁ NỔI BẬT</span></h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300.png?text=Sắt+Đặc" alt="Sắt Đặc">
-                    <div class="product-info">
-                        <h3>Sắt Đặc</h3>
-                        <p>10.000đ - 15.000đ / kg</p>
+                <div class="service-cards">
+                    <div class="service-card blue">
+                        <img src="https://via.placeholder.com/80x80.png?text=Giá" alt="Bảng giá">
+                        <h3>Bảng giá phế liệu</h3>
+                        <p>Cập nhật bảng giá các loại phế liệu mới nhất, đảm bảo lợi ích cho khách hàng.</p>
+                        <a href="#" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
-                    <div class="discount-badge">-10%</div>
-                </div>
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300.png?text=Đồng+Vàng" alt="Đồng Vàng">
-                    <div class="product-info">
-                        <h3>Đồng Vàng</h3>
-                        <p>120.000đ - 150.000đ / kg</p>
-                    </div>
-                    <div class="discount-badge">-5%</div>
-                </div>
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300.png?text=Nhôm+Lon" alt="Nhôm Lon">
-                    <div class="product-info">
-                        <h3>Nhôm Lon</h3>
-                        <p>25.000đ - 30.000đ / kg</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300.png?text=Giấy+Carton" alt="Giấy Carton">
-                    <div class="product-info">
-                        <h3>Giấy Carton</h3>
-                        <p>3.000đ - 5.000đ / kg</p>
+                    <div class="service-card yellow">
+                        <img src="https://via.placeholder.com/80x80.png?text=Thu+Mua" alt="Dịch vụ thu mua">
+                        <h3>Dịch vụ thu mua</h3>
+                        <p>Dịch vụ thu mua tận nơi chuyên nghiệp, nhanh chóng và tiện lợi.</p>
+                        <a href="#" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ==================== SERVICES SECTION ==================== -->
-    <section class="services">
-        <div class="container">
-            <div class="service-intro">
-                <h2>Vì một môi trường xanh hơn</h2>
-                <p>Tham khảo các dịch vụ của chúng tôi và cùng chung tay bảo vệ môi trường.</p>
-            </div>
-            <div class="service-cards">
-                <div class="service-card blue">
-                    <img src="https://via.placeholder.com/80x80.png?text=Giá" alt="Bảng giá">
-                    <h3>Bảng giá phế liệu</h3>
-                    <p>Cập nhật bảng giá các loại phế liệu mới nhất, đảm bảo lợi ích cho khách hàng.</p>
-                    <a href="#" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+        <!-- ==================== STATS SECTION ==================== -->
+        <section class="stats">
+            <div class="container">
+                <div class="stat-item">
+                    <h2>15+</h2>
+                    <p>Năm kinh nghiệm</p>
+                    <span>Đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực thu mua.</span>
                 </div>
-                <div class="service-card yellow">
-                    <img src="https://via.placeholder.com/80x80.png?text=Thu+Mua" alt="Dịch vụ thu mua">
-                    <h3>Dịch vụ thu mua</h3>
-                    <p>Dịch vụ thu mua tận nơi chuyên nghiệp, nhanh chóng và tiện lợi.</p>
-                    <a href="#" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="stat-item">
+                    <h2>6K+</h2>
+                    <p>Khách hàng hài lòng</p>
+                    <span>Đánh giá từ các "Sen" đã tin tưởng sử dụng sản phẩm, dịch vụ.</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ==================== STATS SECTION ==================== -->
-    <section class="stats">
-        <div class="container">
-            <div class="stat-item">
-                <h2>15+</h2>
-                <p>Năm kinh nghiệm</p>
-                <span>Đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực thu mua.</span>
-            </div>
-            <div class="stat-item">
-                <h2>6K+</h2>
-                <p>Khách hàng hài lòng</p>
-                <span>Đánh giá từ các "Sen" đã tin tưởng sử dụng sản phẩm, dịch vụ.</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== POSTS SECTION ==================== -->
-    <section class="posts">
-        <div class="container">
-            <div class="post-header">
-                <div>
-                    <p class="subtitle">OUR POST</p>
-                    <h2 class="section-title"><span>BÀI VIẾT NỔI BẬT</span></h2>
-                </div>
-                <div class="post-description">
-                    <p>Tổng hợp các bài viết chuyên sâu được chia sẻ bởi đội ngũ chuyên gia của chúng tôi. Giúp bạn hiểu rõ hơn về ngành tái chế và giá trị của từng loại phế liệu.</p>
-                    <a href="#" class="btn">Xem toàn bộ <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="post-grid">
-                <div class="post-card">
-                    <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Phân+loại+nhựa');">
-                        <div class="post-date"><span>25</span>Th2</div>
+        <section class="posts">
+            <div class="container">
+                <div class="post-header">
+                    <div>
+                        <p class="subtitle">OUR POST</p>
+                        <h2 class="section-title"><span>BÀI VIẾT NỔI BẬT</span></h2>
                     </div>
-                    <h3>Cách phân loại các loại nhựa tái chế đơn giản và nhanh chóng nhất</h3>
-                    <p>Mang một chút kiến thức về nhựa có thể là một trải nghiệm tuyệt vời, nhưng cũng...</p>
-                </div>
-                <div class="post-card">
-                    <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Giá+đồng');">
-                        <div class="post-date"><span>11</span>Th2</div>
+                    <div class="post-description">
+                        <p>Tổng hợp các bài viết chuyên sâu được chia sẻ bởi đội ngũ chuyên gia của chúng tôi. Giúp bạn hiểu rõ hơn về ngành tái chế và giá trị của từng loại phế liệu.</p>
+                        <a href="#" class="btn">Xem toàn bộ <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
-                    <h3>Hướng dẫn chi tiết cách bán đồng phế liệu được giá cao và hiệu quả</h3>
-                    <p>Đối với những người muốn bán phế liệu, việc gửi chúng đi xa thường là một thường lệ...</p>
                 </div>
-                <div class="post-card">
-                    <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Tái+chế+sắt');">
-                        <div class="post-date"><span>08</span>Th2</div>
+                <div class="post-grid">
+                    <div class="post-card">
+                        <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Phân+loại+nhựa');">
+                            <div class="post-date"><span>25</span>Th2</div>
+                        </div>
+                        <h3>Cách phân loại các loại nhựa tái chế đơn giản và nhanh chóng nhất</h3>
+                        <p>Mang một chút kiến thức về nhựa có thể là một trải nghiệm tuyệt vời, nhưng cũng...</p>
                     </div>
-                    <h3>Cách làm hạt cho mèo tại nhà để làm với những nguyên liệu đơn giản</h3>
-                    <p>Chăm sóc sức khỏe cho thú cưng là điều vô cùng quan trọng đối với...</p>
+                    <div class="post-card">
+                        <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Giá+đồng');">
+                            <div class="post-date"><span>11</span>Th2</div>
+                        </div>
+                        <h3>Hướng dẫn chi tiết cách bán đồng phế liệu được giá cao và hiệu quả</h3>
+                        <p>Đối với những người muốn bán phế liệu, việc gửi chúng đi xa thường là một thường lệ...</p>
+                    </div>
+                    <div class="post-card">
+                        <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Tái+chế+sắt');">
+                            <div class="post-date"><span>08</span>Th2</div>
+                        </div>
+                        <h3>Cách làm hạt cho mèo tại nhà để làm với những nguyên liệu đơn giản</h3>
+                        <p>Chăm sóc sức khỏe cho thú cưng là điều vô cùng quan trọng đối với...</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-col">
-                <div class="footer-logo-area">
-                    <img id="footer-logo" src="https://i.imgur.com/J4j2kYw.png" alt="Logo Phế Liệu">
-                </div>
-                <p>Với sứ mệnh tạo ra một giải pháp xanh và phát triển bền vững, chúng tôi phát triển sàn thương mại này để tối ưu giải pháp cho cá nhân và doanh nghiệp.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Phế liệu thu mua</h4>
-                <ul>
-                    <li><a href="#">Tái chế chai nhựa</a></li>
-                    <li><a href="#">Tái chế lon nước</a></li>
-                    <li><a href="#">Sử dụng quần áo cũ</a></li>
-                    <li><a href="#">Quyên góp ủng hộ</a></li>
-                    <li><a href="#">Tái chế giấy vụn</a></li>
-                    <li><a href="#">Tái chế bìa carton</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Về chúng tôi</h4>
-                <ul>
-                    <li><a href="#">Giới thiệu ECOCYCLE</a></li>
-                    <li><a href="#">Liên hệ tổ chức</a></li>
-                    <li><a href="#">Điều khoản sử dụng</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                    <li><a href="#">Câu hỏi thường gặp</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Đăng ký nhận bản tin</h4>
-                <p>Đăng ký nhận bản tin về khuyến mãi, sự kiện và thông tin cập nhật</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Email">
-                    <button type="submit" class="btn">ĐĂNG KÝ</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 Ecocycle - All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- Vị trí đặt footer -->
+    <div id="footer-placeholder"></div>
 
-    <script src="script.js"></script>
+    <!-- SỬA LẠI THỨ TỰ SCRIPT: templates.js phải được tải trước script.js -->
+    <script src="js/templates.js"></script>
+    <script src="js/script.js"></script>
+
 </body>
 </html>

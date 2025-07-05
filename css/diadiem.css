@@ -1,0 +1,222 @@
+/* ==================== HERO SECTION FOR LOCATIONS PAGE ==================== */
+.hero-locations {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x400.png?text=Môi+Trường+Xanh');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-locations h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero-locations p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* ==================== SEARCH & FILTER BLOCK ==================== */
+.search-filter-section {
+    background-color: var(--light-gray);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.main-search-bar .fa-map-location-dot {
+    font-size: 1.5rem;
+    color: #888;
+}
+
+.main-search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.main-search-bar .btn-gps {
+    background-color: #6c757d;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.advanced-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: 500;
+}
+
+.filter-group select {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* ==================== MAP & RESULTS AREA ==================== */
+.results-section {
+    padding: 40px 0;
+}
+
+.map-results-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Map chiếm 2/3, List chiếm 1/3 */
+    gap: 30px;
+    height: 75vh; /* Chiều cao cố định */
+}
+
+#map-container {
+    background-color: #e9e9e9;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+}
+
+#results-list-container {
+    height: 100%;
+    overflow-y: auto; /* Thêm thanh cuộn nếu danh sách dài */
+    padding-right: 10px;
+}
+
+.location-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.location-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Style cho thẻ được chọn */
+.location-card.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+.location-card .location-name {
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.location-card p {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.location-card p i {
+    margin-right: 8px;
+    color: #888;
+    width: 15px;
+    text-align: center;
+}
+
+.rating-stars {
+    margin-bottom: 15px;
+    color: #ffc107;
+}
+.rating-stars span {
+    color: #666;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.scrap-types {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+.scrap-types .fa-box { color: #8B4513; } /* Giấy */
+.scrap-types .fa-bottle-water { color: #3498db; } /* Nhựa */
+.scrap-types .fa-microchip { color: #f39c12; } /* Điện tử */
+.scrap-types .fa-magnet { color: #95a5a6; } /* Kim loại */
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.card-actions .btn {
+    padding: 8px 15px;
+    flex-grow: 1;
+    text-align: center;
+}
+.card-actions .btn-secondary {
+    background-color: #fff;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+.card-actions .btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 992px) {
+    .map-results-wrapper {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột */
+        height: auto;
+    }
+    #map-container {
+        height: 50vh; /* Đặt chiều cao cố định cho map */
+    }
+    #results-list-container {
+        margin-top: 30px;
+        height: auto;
+        max-height: 60vh; /* Giới hạn chiều cao để không quá dài */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-search-bar {
+        flex-direction: column;
+    }
+    .main-search-bar input, .main-search-bar button {
+        width: 100%;
+    }
+    .advanced-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

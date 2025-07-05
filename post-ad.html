@@ -1,0 +1,110 @@
+<!-- post-ad.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Tin Bán Phế Liệu - ECOCYCLE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/post-ad.css"> <!-- CSS riêng cho trang này -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- STEP 1: MODAL CHỌN DANH MỤC -->
+    <div id="category-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal-btn">×</button>
+            <h2>CHỌN DANH MỤC</h2>
+            <ul class="category-list">
+                <!-- JS sẽ dùng data-category để xác định -->
+                <li data-category="plastic-bottle" data-category-name="Chai Nhựa">
+                    <i class="fa-solid fa-bottle-water"></i><span>Chai Nhựa</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li data-category="scrap-iron" data-category-name="Sắt Vụn">
+                    <i class="fa-solid fa-magnet"></i><span>Sắt Vụn</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li data-category="copper" data-category-name="Đồng">
+                    <i class="fa-solid fa-coins"></i><span>Đồng</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li data-category="electric-wire" data-category-name="Dây Điện">
+                    <i class="fa-solid fa-plug-circle-bolt"></i><span>Dây Điện</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li data-category="battery" data-category-name="Pin">
+                    <i class="fa-solid fa-car-battery"></i><span>Pin</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li data-category="clothes" data-category-name="Quần Áo">
+                    <i class="fa-solid fa-shirt"></i><span>Quần Áo</span><i class="fa-solid fa-chevron-right"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- STEP 2: FORM ĐĂNG TIN CHI TIẾT -->
+    <main id="post-form-container" class="hidden">
+        <div class="container">
+            <form id="post-form">
+                <div class="form-grid">
+                    <!-- Cột trái: Hình ảnh -->
+                    <div class="form-col-left">
+                        <h3>Hình ảnh sản phẩm</h3>
+                        <div class="image-uploader">
+                            <label for="image-input" class="upload-box">
+                                <i class="fa-solid fa-camera"></i>
+                                <span>ĐĂNG TỪ 01 ĐẾN 06 HÌNH</span>
+                            </label>
+                            <input type="file" id="image-input" accept="image/*" multiple hidden>
+                        </div>
+                        <div id="image-preview" class="image-preview-grid">
+                            <!-- Các ảnh preview sẽ được chèn vào đây -->
+                        </div>
+                    </div>
+
+                    <!-- Cột phải: Thông tin -->
+                    <div class="form-col-right">
+                        <div class="form-group">
+                            <label>Danh Mục Tin Đăng *</label>
+                            <input type="text" id="selected-category-display" readonly>
+                        </div>
+                        
+                        <h3>Thông tin chi tiết</h3>
+                        <!-- Các trường thông tin động sẽ được chèn vào đây -->
+                        <div id="dynamic-fields-container"></div>
+
+<div class="form-group">
+    <label for="price">Giá bán *</label>
+    <input type="number" id="price" name="price" placeholder="Nhập giá" required>
+</div>
+
+<h3>Tiêu đề và Mô tả</h3>
+<div class="form-group">
+    <label for="title">Tiêu đề tin đăng *</label>
+    <input type="text" id="title" name="title" maxlength="50" required>
+    <small class="char-counter">0/50 kí tự</small>
+</div>
+<div class="form-group">
+    <label for="description">Mô tả chi tiết *</label>
+    <textarea id="description" name="description" rows="8" maxlength="1500" required></textarea>
+    <small class="char-counter">0/1500 kí tự</small>
+</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- STEP 3: THANH HÀNH ĐỘNG DÍNH Ở DƯỚI -->
+    <div id="sticky-actions-bar" class="sticky-actions hidden">
+        <div class="container">
+            <button type="button" class="btn btn-secondary">Lưu nháp</button>
+            <button id="submit-btn" type="submit" form="post-form" class="btn" disabled>Đăng tin</button>
+        </div>
+    </div>
+
+    <script src="js/templates.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/post-ad.js"></script> <!-- JS riêng cho trang này -->
+</body>
+</html>

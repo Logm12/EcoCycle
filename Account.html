@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tài Khoản - ECOCYCLE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Toàn bộ CSS của bạn giữ nguyên ở đây */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e9fbe5 0%, #b5e7a0 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex; /* Thêm để căn giữa container */
+      align-items: center; /* Thêm để căn giữa container */
+      justify-content: center; /* Thêm để căn giữa container */
+    }
+    .container {
+      max-width: 380px;
+      width: 90%; /* Thêm để responsive trên mobile */
+      margin: 32px auto; /* Điều chỉnh margin */
+      background: #f9fff6;
+      border-radius: 18px;
+      box-shadow: 0 4px 28px rgba(34, 139, 34, 0.10);
+      padding: 38px 32px 28px 32px;
+      border: 2px solid #cbe7c4;
+    }
+    .toggle-btns { display: flex; justify-content: center; margin-bottom: 26px; }
+    .toggle-btns button { flex: 1; font-size: 1.1em; background: #e2f7db; color: #267a2a; border: none; outline: none; padding: 11px 0; margin: 0 3px; border-radius: 10px 10px 0 0; cursor: pointer; transition: background 0.2s; font-weight: 600; }
+    .toggle-btns button.selected { background: linear-gradient(90deg, #5eb86e 80%, #7de27e 100%); color: #fff; box-shadow: 0 2px 8px rgba(34,139,34,0.10); }
+    .hidden { display: none; }
+    form input { display: block; width: 100%; box-sizing: border-box; margin-bottom: 13px; padding: 10px; border: 1.4px solid #cbe7c4; border-radius: 8px; background: #f6fef4; font-size: 1em; transition: border 0.2s; }
+    form input:focus { border: 1.7px solid #5eb86e; outline: none; background: #f2fdf0; }
+    form button { width: 100%; padding: 12px; background: linear-gradient(90deg, #43a047 80%, #72d86b 100%); color: #fff; border: none; border-radius: 8px; font-size: 1.06em; font-weight: bold; cursor: pointer; margin-top: 10px; margin-bottom: 8px; transition: background 0.2s; box-shadow: 0 2px 8px rgba(34,139,34,0.12); }
+    form button:hover { background: linear-gradient(90deg, #388e3c 60%, #5eb86e 100%); }
+    .center { text-align: center; }
+    .or-divider { color: #4ba44b; font-weight: 500; margin-top: 18px; margin-bottom: 14px; letter-spacing: 0.04em; }
+    .social-btn { width: 100%; margin-bottom: 10px; padding: 10px; border: none; border-radius: 7px; font-size: 1em; font-weight: 500; cursor: pointer; color: #fff; background: linear-gradient(90deg,#4caf50 75%, #43a047 100%); display: flex; align-items: center; justify-content: center; gap: 12px; transition: background 0.18s; box-shadow: 0 2px 8px rgba(34,139,34,0.10); }
+    .social-btn.google { background: linear-gradient(90deg,#34a853 75%, #a8e063 100%); color: #fff; }
+    .social-btn.facebook { background: linear-gradient(90deg,#1976d2 75%, #43a047 100%); }
+    .leaf { width: 26px; vertical-align: middle; margin-right: 8px; }
+    .eco-header { display: flex; align-items: center; justify-content: center; margin-bottom: 18px; gap: 10px; }
+    .eco-header span { font-size: 1.7em; font-weight: 700; color: #388e3c; letter-spacing: 0.03em; }
+    ::placeholder { color: #8bb78c; opacity: 1; }
+    @media (max-width: 480px) { .container { padding: 20px 4vw; } .eco-header span { font-size: 1.5em; } }
+  </style>
+</head>
+<body class="page-account"> <!-- Thêm class để JS nhận diện -->
+  <div class="container">
+    <div class="eco-header">
+      <img class="leaf" src="https://cdn-icons-png.flaticon.com/512/2909/2909763.png" alt="leaf icon" />
+      <span>ECOCYCLE</span>
+    </div>
+    <div class="toggle-btns">
+      <button id="signInBtn" class="selected">Đăng Nhập</button>
+      <button id="signUpBtn">Đăng Ký</button>
+    </div>
+    <form id="authForm">
+      <div id="signUpFields" class="hidden">
+        <input type="text" id="name" placeholder="Tên của bạn" autocomplete="given-name" />
+        <input type="text" id="lastName" placeholder="Họ" autocomplete="family-name" />
+      </div>
+      <input type="email" id="email" placeholder="Email" required autocomplete="email" />
+      <input type="password" id="password" placeholder="Mật khẩu" required autocomplete="current-password" />
+      <button type="submit" id="submitBtn">Đăng Nhập</button>
+    </form>
+    <div class="center">
+      <div class="or-divider">HOẶC</div>
+      <button class="social-btn google" id="googleBtn">
+        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png" alt="Google Icon" style="width:22px;vertical-align:middle;" />
+        Tiếp tục với Google
+      </button>
+      <button class="social-btn facebook" id="facebookBtn">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook Icon" style="width:22px;vertical-align:middle;" />
+        Tiếp tục với Facebook
+      </button>
+    </div>
+  </div>
+
+  <!-- Logic sẽ được tải từ file script.js chung -->
+  <script src="js/script.js"></script>
+</body>
+</html>

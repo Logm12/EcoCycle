@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #28a745; /* Green */
+    --secondary-color: #007bff; /* Blue */
+    --accent-color: #ffc107; /* Yellow */
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --white: #fff;
+    --border-color: #dee2e6;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #218838; /* Darker green */
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-title span::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 10px auto 0;
+}
+
+
+#main-header {
+    background-color: var(--white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.header-main .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.logo h1 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.logo p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.search-bar {
+    display: flex;
+    width: 400px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-actions .btn-post {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.user-actions .btn-post:hover {
+    background-color: #e0a800;
+}
+
+.user-actions .cart-link {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+#auth-status {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+#auth-status a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+#auth-status a:hover {
+    color: var(--primary-color);
+}
+
+.user-greeting {
+    font-weight: 500;
+    color: #333;
+}
+.user-greeting strong {
+    color: var(--secondary-color);
+}
+#logout-link {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+.main-nav {
+    border-top: 1px solid var(--border-color);
+}
+
+
+.main-nav .container ul {
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+}
+
+.main-nav ul li a.active, .main-nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+.main-nav ul li a.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+}
+
+
+nav.main-nav .dropdown {
+    position: relative;
+}
+
+nav.main-nav .dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px; 
+    padding: 10px 0;
+    min-width: 200px;
+    border: 1px solid #eee;
+    z-index: 1001; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(10px); 
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; 
+}
+
+nav.main-nav .dropdown:hover .dropdown-menu {
+    display: block; 
+    opacity: 1; 
+    visibility: visible;
+    transform: translateY(0); 
+}
+
+nav.main-nav .dropdown-menu li a {
+    padding: 10px 20px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease; 
+}
+
+nav.main-nav .dropdown-menu li a:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color); 
+}
+
+
+
+/* ==================== HERO SECTION ==================== */
+.hero {
+    background: url('https://via.placeholder.com/1920x600.png?text=Bãi+phế+liệu') no-repeat center center/cover;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin: 10px 0;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* ==================== SECTIONS GENERAL ==================== */
+section {
+    padding: 80px 0;
+}
+
+/* Categories Section */
+.categories {
+    background-color: var(--light-gray);
+}
+.categories .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.category-item {
+    text-align: center;
+}
+.category-item img {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.category-item:hover img {
+    transform: translateY(-10px);
+}
+.category-item p {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Featured Products */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.product-card {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
+}
+.product-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.product-info {
+    padding: 20px;
+}
+.product-info h3 {
+    margin-bottom: 10px;
+}
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-weight: 700;
+}
+
+/* Services Section */
+.services {
+    background-color: var(--light-gray);
+}
+.service-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
+.service-intro h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.service-cards {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+.service-card {
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    max-width: 400px;
+}
+.service-card.blue {
+    background-color: #e7f3ff;
+}
+.service-card.yellow {
+    background-color: #fff8e1;
+}
+.service-card img {
+    margin-bottom: 20px;
+}
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+.btn-service {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    color: var(--white);
+}
+.service-card.blue .btn-service {
+    background-color: var(--secondary-color);
+}
+.service-card.yellow .btn-service {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+/* Stats Section */
+.stats {
+    background: url('https://via.placeholder.com/1920x400.png?text=Background') no-repeat center center/cover;
+    color: var(--white);
+    text-align: center;
+}
+.stats .container {
+    display: flex;
+    justify-content: space-around;
+}
+.stat-item h2 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+.stat-item p {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Posts Section */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+.post-header .subtitle {
+    color: #999;
+    font-weight: 700;
+}
+.post-header .section-title {
+    text-align: left;
+    margin-bottom: 0;
+}
+.post-header .section-title span::after {
+    margin: 10px 0 0;
+}
+.post-description {
+    max-width: 450px;
+}
+.post-description .btn {
+    margin-top: 15px;
+}
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.post-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.post-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.post-date {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--white);
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.post-date span {
+    font-size: 1.5rem;
+    display: block;
+}
+.post-card h3 {
+    padding: 20px 20px 10px;
+    font-size: 1.2rem;
+}
+.post-card p {
+    padding: 0 20px 20px;
+    color: #666;
+}
+
+/* ==================== FOOTER ==================== */
+.site-footer {
+    background-color: var(--dark-gray);
+    color: #ccc;
+    padding-top: 60px;
+}
+.site-footer .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+.footer-col ul li a {
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+.footer-col ul li a:hover {
+    color: var(--primary-color);
+}
+.footer-logo-area img {
+    max-width: 150px;
+    margin-bottom: 15px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+.newsletter-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    background-color: #555;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+.newsletter-form .btn {
+    width: 100%;
+}
+.footer-bottom {
+    border-top: 1px solid #555;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
