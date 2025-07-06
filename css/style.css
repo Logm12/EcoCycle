@@ -273,7 +273,6 @@ nav.main-nav .dropdown-menu li a:hover {
 .hero {
     /* Kỹ thuật dùng linear-gradient để tạo lớp phủ màu đen mờ trên ảnh */
     background: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Lớp phủ màu đen mờ 50% */
         url('/images/banner.png') no-repeat center center/cover; /* Ảnh nền mới */
     
     height: 600px;
