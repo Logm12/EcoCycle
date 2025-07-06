@@ -1,21 +1,17 @@
 // js/map.js
 
-// Bọc toàn bộ code trong một hàm IIFE để tránh xung đột biến toàn cục
 (function() {
-    // Chỉ thực thi script nếu ta đang ở đúng trang (có #map-container)
     const mapContainer = document.getElementById('map-container');
     if (!mapContainer) {
         return;
     }
 
-    // --- KHỞI TẠO BIẾN & HẰNG SỐ ---
     const HANOI_COORDS = [21.0285, 105.8542];
     const map = L.map(mapContainer).setView(HANOI_COORDS, 13);
     const markersLayer = L.layerGroup().addTo(map);
-    let userLocation = HANOI_COORDS; // Vị trí mặc định của người dùng
+    let userLocation = HANOI_COORDS; 
     let userMarker = null;
-
-    // --- DỮ LIỆU MẪU (THAY THẾ BẰNG API TRONG THỰC TẾ) ---
+//Replace by API in the future
     const locationsData = [
         { id: 1, name: "Vựa Phế Liệu Thuận Phát", address: "123 Đường Giải Phóng, Hai Bà Trưng, Hà Nội", lat: 21.0047, lng: 105.8431, types: ["metal", "plastic"], rating: 4.5 },
         { id: 2, name: "Điểm Thu Mua Giấy Cô Lan", address: "45 Ngõ Tự Do, Cầu Giấy, Hà Nội", lat: 21.0333, lng: 105.7950, types: ["paper"], rating: 4.8 },
@@ -25,12 +21,10 @@
         { id: 6, name: "Sắt Vụn Chú Hùng", address: "33 Đê La Thành, Đống Đa, Hà Nội", lat: 21.0228, lng: 105.8223, types: ["metal"], rating: 3.9 }
     ];
 
-    // --- CÀI ĐẶT BẢN ĐỒ ---
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // --- CÁC HÀM TIỆN ÍCH ---
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 6371; // Bán kính Trái Đất (km)
         const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -42,7 +36,6 @@
         return R * c;
     }
 
-    // --- CÁC HÀM RENDER (HIỂN THỊ) ---
     function renderLocationList(locations) {
         const listElement = document.getElementById('results-list');
         if (!listElement) return;
@@ -98,7 +91,6 @@
         });
     }
 
-    // --- HÀM LỌC VÀ CẬP NHẬT KẾT QUẢ ---
     function updateResults() {
         const addressQuery = document.getElementById('address-input').value.toLowerCase();
         const typeFilter = document.getElementById('scrap-type-filter').value;
@@ -121,7 +113,6 @@
         renderMapMarkers(filteredLocations);
     }
 
-    // --- GẮN CÁC SỰ KIỆN ---
     function addEventListeners() {
         document.getElementById('address-input')?.addEventListener('keyup', updateResults);
         document.getElementById('scrap-type-filter')?.addEventListener('change', updateResults);
@@ -152,10 +143,9 @@
         });
     }
 
-    // --- KHỞI CHẠY ---
     document.addEventListener('DOMContentLoaded', () => {
         addEventListeners();
         updateResults(); // Chạy lần đầu khi tải trang
     });
 
-})(); // Kết thúc IIFE
+})(); 
