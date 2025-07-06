@@ -1,0 +1,148 @@
+/* css/pricelist.css */
+
+main {
+    background-color: #f7f9fc; /* Một màu nền xám rất nhạt */
+    padding: 60px 0;
+}
+
+.pricelist-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pricelist-header h1 {
+    font-size: 2.8rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.pricelist-header p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+/* --- BỘ LỌC --- */
+.price-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.search-input-group {
+    flex-grow: 1;
+    position: relative;
+}
+
+.search-input-group i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.search-input-group input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.price-filters select {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--white);
+}
+
+.price-filters .btn {
+    padding: 12px 25px;
+}
+
+/* --- BẢNG GIÁ --- */
+.price-table-container {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow: hidden; /* Để bo góc hoạt động với table */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead tr {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Zebra striping */
+}
+
+tbody tr:hover {
+    background-color: #eaf5ff; /* Màu xanh dương nhạt khi hover */
+}
+
+td:first-child {
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+/* --- PHÂN TRANG --- */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+#pagination-summary {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+#pagination-controls button {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    margin: 0 3px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#pagination-controls button:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+}
+
+#pagination-controls button.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+#pagination-controls button.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

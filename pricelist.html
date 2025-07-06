@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Giá Phế Liệu Hôm Nay - ECOCYCLE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pricelist.css"> <!-- CSS riêng cho trang này -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <div class="container">
+            <div class="pricelist-header">
+                <h1>Bảng Giá Phế Liệu Hôm Nay</h1>
+                <p>Cập nhật mới nhất, cam kết giá tốt nhất thị trường.</p>
+            </div>
+
+            <!-- BỘ LỌC VÀ TÌM KIẾM -->
+            <div class="price-filters">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Tra cứu nhanh tên phế liệu...">
+                </div>
+                <select id="location-filter">
+                    <option value="all">Toàn quốc</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                    <option value="danang">Đà Nẵng</option>
+                </select>
+                <button id="search-btn" class="btn">Tra cứu</button>
+            </div>
+
+            <!-- BẢNG GIÁ -->
+            <div class="price-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên Phế Liệu</th>
+                            <th>Giá Thu Mua (VNĐ/kg)</th>
+                            <th>Ghi Chú</th>
+                        </tr>
+                    </thead>
+                    <tbody id="price-table-body">
+                        <!-- Dữ liệu sẽ được chèn vào đây bằng JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PHÂN TRANG -->
+            <div class="pagination-container">
+                <span id="pagination-summary"></span>
+                <div id="pagination-controls">
+                    <!-- Các nút phân trang sẽ được chèn vào đây -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/templates.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/pricelist.js"></script> <!-- JS riêng cho trang này -->
+</body>
+</html>
