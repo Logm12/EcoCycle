@@ -268,32 +268,36 @@ nav.main-nav .dropdown-menu li a:hover {
 
 
 
-/* ==================== HERO SECTION ==================== */
+
+
 .hero {
     /* Kỹ thuật dùng linear-gradient để tạo lớp phủ màu đen mờ trên ảnh */
     background: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Lớp phủ màu đen mờ 50% */
-        url('https://images.unsplash.com/photo-1532992354482-a87376a84645?q=80&w=1932&auto=format&fit=crop') no-repeat center center/cover; /* Ảnh nền mới */
+        url('/images/banner.png') no-repeat center center/cover; /* Ảnh nền mới */
     
     height: 600px;
     display: flex;
     align-items: center;
-    color: var(--white);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    color: var(--white); /* Đảm bảo chữ luôn có màu trắng */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Tăng độ đậm của bóng chữ một chút */
 }
 
-/* Thêm đoạn này để đổi màu nút "Liên hệ ngay" cho nổi bật */
+/* Thêm đoạn này để đổi màu nút "Liên hệ ngay" cho nổi bật trên nền ảnh */
 .hero .btn {
     background-color: var(--accent-color); /* Đổi thành màu vàng nhấn */
     color: var(--text-color); /* Chữ màu đen cho dễ đọc trên nền vàng */
     font-size: 1.1rem;
     padding: 15px 35px;
     border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Thêm bóng đổ cho nút */
 }
 
 .hero .btn:hover {
     background-color: #e0a800; /* Màu vàng đậm hơn khi hover */
     color: var(--text-color);
+    transform: translateY(-2px); /* Hiệu ứng nhấc lên khi hover */
+    transition: all 0.2s ease-in-out;
 }
 
 .hero-content {
