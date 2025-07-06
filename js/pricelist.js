@@ -1,8 +1,6 @@
-// js/pricelist.js (PHIÊN BẢN ỔN ĐỊNH - SỬ DỤNG DỮ LIỆU NHÚNG)
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- BIẾN TRẠNG THÁI ---
     let currentPage = 1;
     const rowsPerPage = 10;
     let filteredData = [...priceData];
@@ -92,10 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         displayTable(1);
     }
 
-    // --- EVENT LISTENERS ---
     if (searchInput) searchInput.addEventListener('keyup', handleSearch);
     if (searchBtn) searchBtn.addEventListener('click', handleSearch);
 
-    // --- KHỞI CHẠY LẦN ĐẦU ---
     displayTable(1);
 });
