@@ -142,25 +142,71 @@ function loadUserPosts() {
     });
 }
 
+function displayTopProducts() {
+    const sliderWrapper = document.querySelector('#top-products-slider .swiper-wrapper');
+    if (!sliderWrapper) return; // Chỉ chạy nếu có slider
 
-/**
- * ===================================================================
- * ĐIỂM KHỞI CHẠY CHÍNH CỦA SCRIPT
- * Chạy sau khi toàn bộ DOM đã được tải.
- * ===================================================================
- */
+    // Hàm helper để lấy giá trị số cao nhất từ chuỗi giá
+    const getMaxValue = (priceString) => {
+        if (typeof priceString !== 'string' || priceString.toLowerCase().includes('liên hệ')) {
+            return 0;
+        }
+        const parts = priceString.split('-').map(part => parseInt(part.trim().replace(/\./g, '')));
+        return Math.max(...parts);
+    };
+
+    // Sắp xếp dữ liệu và lấy top 10 sản phẩm (để slider có nhiều nội dung hơn)
+    const sortedData = [...priceData].sort((a, b) => getMaxValue(b.price) - getMaxValue(a.price));
+    const topProducts = sortedData.slice(0, 10);
+
+    // Tạo HTML cho các slide và chèn vào wrapper
+    sliderWrapper.innerHTML = ''; // Xóa nội dung cũ
+    topProducts.forEach(product => {
+        
+        const slideHTML = `
+            <div class="swiper-slide">
+                <div class="product-card">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.price} đ/kg</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        sliderWrapper.innerHTML += slideHTML;
+    });
+
+    // Khởi tạo Swiper sau khi đã chèn HTML
+    const swiper = new Swiper('#top-products-slider', {
+        // Các tùy chọn
+        loop: true, // Lặp lại vô tận
+        spaceBetween: 30, // Khoảng cách giữa các slide
+
+        // Responsive breakpoints
+        breakpoints: {
+            // Khi chiều rộng màn hình >= 640px
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20
+            },
+            // Khi chiều rộng màn hình >= 1024px
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30
+            }
+        },
+
+        // Nút điều hướng
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // Logic này sẽ chạy trên MỌI trang, nhưng các hàm bên trong
-    // có cơ chế tự kiểm tra để chỉ thực thi khi cần thiết.
-    
-    // 1. Chạy logic cho trang tài khoản nếu có
     handleAccountPage();
-
-    // 2. Chạy logic tải tin đăng nếu ở trang chủ
     loadUserPosts();
+	displayTopProducts();
 
-    // Các hàm chung khác có thể được gọi ở đây, ví dụ:
-    // initializeMobileMenu();
-    // initializeScrollEffects();
 });

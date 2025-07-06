@@ -82,10 +82,15 @@ ul {
     width: 100%;
 }
 .header-top {
-    background-color: #f8f9fa;
+    background-color: var(--primary-color);
+    color: var(--white); /* Đổi màu chữ thành trắng */
     padding: 8px 0;
     font-size: 0.9rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #218838; 
+}
+
+.header-top .container span i {
+    color: var(--white);
 }
 
 .header-top .container {
@@ -265,12 +270,30 @@ nav.main-nav .dropdown-menu li a:hover {
 
 /* ==================== HERO SECTION ==================== */
 .hero {
-    background: url('https://via.placeholder.com/1920x600.png?text=Bãi+phế+liệu') no-repeat center center/cover;
+    /* Kỹ thuật dùng linear-gradient để tạo lớp phủ màu đen mờ trên ảnh */
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Lớp phủ màu đen mờ 50% */
+        url('https://images.unsplash.com/photo-1532992354482-a87376a84645?q=80&w=1932&auto=format&fit=crop') no-repeat center center/cover; /* Ảnh nền mới */
+    
     height: 600px;
     display: flex;
     align-items: center;
     color: var(--white);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* Thêm đoạn này để đổi màu nút "Liên hệ ngay" cho nổi bật */
+.hero .btn {
+    background-color: var(--accent-color); /* Đổi thành màu vàng nhấn */
+    color: var(--text-color); /* Chữ màu đen cho dễ đọc trên nền vàng */
+    font-size: 1.1rem;
+    padding: 15px 35px;
+    border: none;
+}
+
+.hero .btn:hover {
+    background-color: #e0a800; /* Màu vàng đậm hơn khi hover */
+    color: var(--text-color);
 }
 
 .hero-content {
@@ -560,4 +583,38 @@ section {
     max-height: 150px;
     width: auto;     
     display: block;   
+}
+.swiper {
+    width: 100%;
+    padding: 20px 0; /* Thêm khoảng đệm để không bị quá sát */
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary-color); /* Đổi màu mũi tên thành màu xanh lá */
+    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Điều chỉnh kích thước icon mũi tên */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.2rem;
+    font-weight: bold;
 }

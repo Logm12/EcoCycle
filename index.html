@@ -8,6 +8,8 @@
     <!-- Đường dẫn đã được cập nhật tới thư mục css/ -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 </head>
 <body>
 
@@ -40,62 +42,40 @@
                     <p>SẮT VỤN</p>
                 </div>
                 <div class="category-item">
-                    <img src="https://via.placeholder.com/100x100.png?text=Đồng" alt="Đồng">
+                    <img src="/images/Product/Đồng(1).jpg" alt="Đồng">
                     <p>ĐỒNG</p>
                 </div>
                 <div class="category-item">
-                    <img src="https://via.placeholder.com/100x100.png?text=Dây+Điện" alt="Dây Điện">
+                    <img src="/images/Product/dây điện(1).jpg" alt="Dây Điện">
                     <p>DÂY ĐIỆN</p>
                 </div>
                 <div class="category-item">
-                    <img src="https://via.placeholder.com/100x100.png?text=Pin" alt="Pin">
+                    <img src="/images/Product/battery-1930820.jpg" alt="Pin">
                     <p>PIN</p>
                 </div>
                 <div class="category-item">
-                    <img src="https://via.placeholder.com/100x100.png?text=Quần+Áo" alt="Quần Áo">
+                    <img src="/images/Product/quần áo(1).jpg" alt="Quần Áo">
                     <p>QUẦN ÁO</p>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== FEATURED PRODUCTS ==================== -->
-        <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title"><span>BẢNG GIÁ NỔI BẬT</span></h2>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x300.png?text=Sắt+Đặc" alt="Sắt Đặc">
-                        <div class="product-info">
-                            <h3>Sắt Đặc</h3>
-                            <p>10.000đ - 15.000đ / kg</p>
-                        </div>
-                        <div class="discount-badge">-10%</div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x300.png?text=Đồng+Vàng" alt="Đồng Vàng">
-                        <div class="product-info">
-                            <h3>Đồng Vàng</h3>
-                            <p>120.000đ - 150.000đ / kg</p>
-                        </div>
-                        <div class="discount-badge">-5%</div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x300.png?text=Nhôm+Lon" alt="Nhôm Lon">
-                        <div class="product-info">
-                            <h3>Nhôm Lon</h3>
-                            <p>25.000đ - 30.000đ / kg</p>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x300.png?text=Giấy+Carton" alt="Giấy Carton">
-                        <div class="product-info">
-                            <h3>Giấy Carton</h3>
-                            <p>3.000đ - 5.000đ / kg</p>
-                        </div>
-                    </div>
-                </div>
+<section class="top-products" style="background-color: #f7f9fc; padding: 80px 0;">
+    <div class="container">
+        <h2 class="section-title"><span>SẢN PHẨM NỔI BẬT</span></h2>
+        
+        <!-- Cấu trúc của Swiper Slider -->
+        <div id="top-products-slider" class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Các slide sản phẩm sẽ được JS chèn vào đây -->
             </div>
-        </section>
+            
+            <!-- Nút mũi tên điều hướng -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
 <!-- ==================== LATEST POSTS ==================== -->
 <section class="latest-posts">
     <div class="container">
@@ -114,13 +94,13 @@
                 </div>
                 <div class="service-cards">
                     <div class="service-card blue">
-                        <img src="https://via.placeholder.com/80x80.png?text=Giá" alt="Bảng giá">
+                        <img src="/images/pricelist.png" alt="Bảng giá">
                         <h3>Bảng giá phế liệu</h3>
                         <p>Cập nhật bảng giá các loại phế liệu mới nhất, đảm bảo lợi ích cho khách hàng.</p>
                         <a href="pricelist.html" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card yellow">
-                        <img src="https://via.placeholder.com/80x80.png?text=Thu+Mua" alt="Dịch vụ thu mua">
+                        <img src="/images/thumua.jpg" alt="Dịch vụ thu mua">
                         <h3>Dịch vụ thu mua</h3>
                         <p>Dịch vụ thu mua tận nơi chuyên nghiệp, nhanh chóng và tiện lợi.</p>
                         <a href="#" class="btn-service">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
@@ -129,21 +109,6 @@
             </div>
         </section>
 
-        <!-- ==================== STATS SECTION ==================== -->
-        <section class="stats">
-            <div class="container">
-                <div class="stat-item">
-                    <h2>15+</h2>
-                    <p>Năm kinh nghiệm</p>
-                    <span>Đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực thu mua.</span>
-                </div>
-                <div class="stat-item">
-                    <h2>6K+</h2>
-                    <p>Khách hàng hài lòng</p>
-                    <span>Đánh giá từ các "Sen" đã tin tưởng sử dụng sản phẩm, dịch vụ.</span>
-                </div>
-            </div>
-        </section>
 
         <section class="posts">
             <div class="container">
@@ -159,14 +124,14 @@
                 </div>
                 <div class="post-grid">
                     <div class="post-card">
-                        <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Phân+loại+nhựa');">
+                        <div class="post-image" style="background-image: url('/images/phanloai.png');">
                             <div class="post-date"><span>25</span>Th2</div>
                         </div>
                         <h3>Cách phân loại các loại nhựa tái chế đơn giản và nhanh chóng nhất</h3>
                         <p>Mang một chút kiến thức về nhựa có thể là một trải nghiệm tuyệt vời, nhưng cũng...</p>
                     </div>
                     <div class="post-card">
-                        <div class="post-image" style="background-image: url('https://via.placeholder.com/400x250.png?text=Giá+đồng');">
+                        <div class="post-image" style="background-image: url('/images/bandong.jpg');">
                             <div class="post-date"><span>11</span>Th2</div>
                         </div>
                         <h3>Hướng dẫn chi tiết cách bán đồng phế liệu được giá cao và hiệu quả</h3>
@@ -178,6 +143,9 @@
     </main>
 
     <div id="footer-placeholder"></div>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="js/data.js"></script> 
 
     <script src="js/templates.js"></script>
     <script src="js/script.js"></script>

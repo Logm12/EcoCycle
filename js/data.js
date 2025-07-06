@@ -1,0 +1,36 @@
+// js/data.js
+// NGUỒN DỮ LIỆU TRUNG TÂM CHO TOÀN BỘ DỰ ÁN
+
+const priceData = [
+    { name: "Sắt đặc", price: "8.000 - 22.000", note: "Nguyên chất, không lẫn tạp chất" },
+    { name: "Sắt vụn", price: "8.500 - 14.000", note: "Sắt công trình, nhà xưởng" },
+    { name: "Bazo sắt", price: "7.500 - 12.000", note: "Sắt tiện, phay" },
+    { name: "Sắt gỉ sét", price: "8.000 - 13.000", note: "Sắt để lâu ngoài trời" },
+    { name: "Dây thép sắt", price: "8.000 - 13.000", note: "Dây thép từ công trình" },
+    { name: "Đồng cáp", price: "175.000 - 285.000", note: "Lõi đồng từ dây cáp lớn" },
+    { name: "Đồng đỏ", price: "165.000 - 255.000", note: "Tỷ lệ đồng cao, không lẫn tạp chất" },
+    { name: "Đồng vàng", price: "115.000 - 215.000", note: "Thường là hợp kim của đồng" },
+    { name: "Mạt đồng vàng", price: "95.000 - 185.000", note: "Vụn đồng từ quá trình sản xuất" },
+    { name: "Nhôm loại 1 (dẻo, thanh)", price: "53.000 - 71.000", note: "Nhôm nguyên chất, không sơn" },
+    { name: "Nhôm loại 2 (hợp kim)", price: "43.000 - 62.000", note: "Nhôm từ chi tiết máy, vỏ" },
+    { name: "Bột nhôm", price: "15.000 - 25.000", note: "Bột nhôm nguyên chất" },
+    { name: "Nhôm dẻo", price: "45.000 - 55.000", note: "Nhôm có thể uốn dẻo" },
+    { name: "Mạt nhôm", price: "32.000 - 48.000", note: "Vụn nhôm từ sản xuất" },
+    { name: "Inox 304, 316", price: "41.000 - 68.000", note: "Loại cao cấp, không gỉ" },
+    { name: "Inox 201, 430", price: "18.000 - 32.000", note: "Loại phổ thông" },
+    { name: "Bazo Inox", price: "15.000 - 25.000", note: "Vụn inox từ sản xuất" },
+    { name: "Nhựa ABS", price: "22.000 - 46.000", note: "Vỏ thiết bị điện tử" },
+    { name: "Nhựa PP", price: "13.000 - 33.000", note: "Chai lọ, vật dụng gia đình" },
+    { name: "Nhựa PVC", price: "9.000 - 27.000", note: "Ống nước, cửa nhựa" },
+    { name: "Nhựa HI", price: "15.000 - 30.000", note: "Nhựa dẻo, chịu va đập" },
+    { name: "Ống nhựa", price: "10.000 - 15.000", note: "Ống nhựa các loại" },
+    { name: "Giấy carton", price: "3.500 - 8.000", note: "Thùng carton các loại" },
+    { name: "Giấy báo", price: "4.500 - 9.000", note: "Giấy in báo" },
+    { name: "Giấy photo", price: "5.000 - 10.000", note: "Giấy văn phòng" },
+    { name: "Bình ắc quy", price: "23.000 - 38.000", note: "Ắc quy xe máy, ô tô" },
+    { name: "Vải vụn", price: "2.000 - 15.000", note: "Vải thừa từ xưởng may" },
+    { name: "Nilon", price: "9.000 - 25.000", note: "Túi nilon sạch" },
+    { name: "Hợp kim", price: "Liên hệ", note: "Tùy loại và thành phần" },
+    { name: "Chì", price: "35.000 - 55.000", note: "Chì cục, chì dẻo" },
+    { name: "Kẽm", price: "30.000 - 45.000", note: "Kẽm in, kẽm cục" }
+];
