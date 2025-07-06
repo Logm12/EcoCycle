@@ -1,38 +1,49 @@
+<!-- templates/header.html (PHIÊN BẢN HOÀN CHỈNH) -->
 <header id="main-header">
+    <!-- Thanh thông tin liên hệ ở trên cùng -->
     <div class="header-top">
         <div class="container">
+            <!-- Các span đã được sắp xếp lại, bỏ spacer và tiền tệ -->
             <span><i class="fa-solid fa-phone"></i> 0337628746</span>
             <span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
-            <span class="spacer"></span>
-            <span>Tiền tệ</span>
         </div>
     </div>
+
+    <!-- Phần header chính -->
     <div class="header-main">
         <div class="container">
-<a href="index.html" class="logo">
-    <img src="images/Logo ECO web.png" alt="ECOCYCLE Logo">
-</a>
+            <!-- THAY THẾ H1 VÀ P BẰNG LOGO -->
+            <a href="index.html" class="logo">
+                <!-- Sử dụng logo từ ảnh bạn cung cấp. Bạn có thể tải ảnh này về và đặt vào thư mục /images/logo.png -->
+                <img src="images/Logo ECO web.png" alt="ECOCYCLE Logo">
+            </a>
+
             <div class="search-bar">
                 <input type="text" placeholder="Tìm kiếm phế liệu...">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
-<div class="user-actions">
-    <a href="post-ad.html" class="btn btn-post">
-        <i class="fa-solid fa-plus"></i> Đăng bán
-    </a>
+
+            <div class="user-actions">
+                <a href="post-ad.html" class="btn btn-post">
+                    <i class="fa-solid fa-plus"></i> Đăng bán
+                </a>
                 <a href="#" class="cart-link">
                     <i class="fa-solid fa-shopping-cart"></i> 0 ₫
                 </a>
                 <div id="auth-status">
+                    <!-- JavaScript sẽ điền vào đây -->
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Thanh điều hướng chính -->
     <nav class="main-nav">
         <div class="container">
             <ul>
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
                 <li><a href="diadiem.html"><i class="fa-solid fa-map-marker-alt"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
+                <li><a href="pricelist.html"><i class="fa-solid fa-tags"></i> BẢNG GIÁ</a></li>
                 <li class="dropdown">
                     <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
