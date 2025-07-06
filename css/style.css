@@ -81,14 +81,28 @@ ul {
     z-index: 1000;
     width: 100%;
 }
+.header-top {
+    background-color: #f8f9fa;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color);
+}
 
+.header-top .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+.header-top .container span:not(:last-child) {
+    margin-right: 25px;
+}
 .header-main .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
 }
-
 .logo h1 {
     color: var(--primary-color);
     margin: 0;
