@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const imagePreview = document.getElementById('image-preview');
     const submitBtn = document.getElementById('submit-btn');
 
-    // --- DATA: Định nghĩa các trường riêng cho mỗi danh mục ---
     const categorySpecificFields = {
         'plastic-bottle': [
             { label: 'Loại nhựa', name: 'plastic_type', type: 'select', options: ['PET', 'HDPE', 'PVC', 'Khác'], required: true },
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FUNCTIONS ---
 
-    // Tạo HTML cho các trường động
     function generateDynamicFields(category) {
         dynamicFieldsContainer.innerHTML = '';
         const fields = categorySpecificFields[category] || [];
@@ -61,10 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Xử lý preview ảnh
     function handleImagePreview(event) {
         imagePreview.innerHTML = '';
-        const files = Array.from(event.target.files).slice(0, 6); // Giới hạn 6 ảnh
+        const files = Array.from(event.target.files).slice(0, 6); 
         files.forEach(file => {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -76,27 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsDataURL(file);
         });
-        // Gọi validate ngay sau khi ảnh thay đổi
         validateForm();
     }
 
-    // Kiểm tra form hợp lệ để bật/tắt nút Đăng tin
     function validateForm() {
-        // Lấy giá trị trực tiếp từ các trường quan trọng
         const titleValue = document.getElementById('title').value.trim();
         const descriptionValue = document.getElementById('description').value.trim();
         const hasImage = imagePreview.children.length > 0;
 
-        // Điều kiện mới: Chỉ cần tiêu đề, mô tả có chữ và có ít nhất 1 ảnh
         const isFormValid = titleValue.length > 0 && descriptionValue.length > 0 && hasImage;
 
-        // Bật/tắt nút dựa trên điều kiện
         submitBtn.disabled = !isFormValid;
     }
 
-    // --- EVENT LISTENERS ---
 
-    // Chọn danh mục
     categoryList.addEventListener('click', (e) => {
         const selectedLi = e.target.closest('li');
         if (!selectedLi) return;
@@ -104,14 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = selectedLi.dataset.category;
         const categoryName = selectedLi.dataset.categoryName;
 
-        // Cập nhật UI
         selectedCategoryDisplay.value = categoryName;
         generateDynamicFields(category);
         categoryModal.classList.add('hidden');
         postFormContainer.classList.remove('hidden');
         stickyActionBar.classList.remove('hidden');
         
-        // Gắn data-category vào form để dùng lúc submit
         postForm.dataset.category = category;
         postForm.dataset.categoryName = categoryName;
 
@@ -119,10 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
         validateForm();
     });
 
-    // Upload ảnh
     imageInput.addEventListener('change', handleImagePreview);
 
-    // Xóa ảnh preview
     imagePreview.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-image-btn')) {
             e.target.closest('.preview-image-container').remove();
@@ -130,14 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Validate form khi người dùng nhập liệu
     postForm.addEventListener('input', validateForm);
 
-    // Submit form
     postForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // 1. Thu thập dữ liệu từ form
         const formData = new FormData(postForm);
         const adData = {
             id: Date.now(),
@@ -150,17 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
             postDate: new Date().toLocaleDateString('vi-VN')
         };
         
-        // Lấy ảnh từ preview
         document.querySelectorAll('.preview-image-container img').forEach(img => {
             adData.images.push(img.src);
         });
 
-        // 2. Lưu vào localStorage
         const existingPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
-        existingPosts.unshift(adData); // Thêm vào đầu mảng
+        existingPosts.unshift(adData); 
         localStorage.setItem('userPosts', JSON.stringify(existingPosts));
 
-        // 3. Thông báo và chuyển hướng
         alert('Đăng tin thành công!');
         window.location.href = 'index.html';
     });
