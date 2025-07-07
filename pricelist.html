@@ -6,6 +6,7 @@
     <title>Bảng Giá Phế Liệu Hôm Nay - ECOCYCLE</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pricelist.css"> <!-- CSS riêng cho trang này -->
+	<link rel="stylesheet" href="css/chatbot.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -60,12 +61,32 @@
             </div>
         </div>
     </main>
-
+<!-- ==================== CHATBOT ==================== -->
+<button class="chatbot-toggler">
+    <i class="fa-solid fa-comments"></i>
+</button>
+<div class="chatbot">
+    <div class="chat-header">
+        <h2>Ecocycle Bot</h2>
+        <span class="close-btn"><i class="fa-solid fa-xmark"></i></span>
+    </div>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <p>Xin chào! 👋<br>Tôi có thể giúp gì cho bạn?</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Nhập tin nhắn..." required></textarea>
+        <span id="send-btn"><i class="fa-solid fa-paper-plane"></i></span>
+    </div>
+</div>
     <div id="footer-placeholder"></div>
 
     <script src="js/templates.js"></script>
     <script src="js/script.js"></script>
 	<script src="js/data.js"></script> 
-    <script src="js/pricelist.js"></script> <!-- JS riêng cho trang này -->
+    <script src="js/pricelist.js"></script> 
+	<script src="js/chatbot.js"></script>	
+
 </body>
 </html>
