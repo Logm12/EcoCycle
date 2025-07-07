@@ -14,24 +14,54 @@ function updateAuthState() {
     const userName = localStorage.getItem('userName') || 'bạn';
 
     if (isLoggedIn) {
-        // Giao diện khi đã đăng nhập
+        // Giao diện khi đã đăng nhập: TẠO MENU DROPDOWN
         authStatusDiv.innerHTML = `
-            <span class="user-greeting">Chào, <strong>${userName}</strong></span>
-            <a href="#" id="logout-link" title="Đăng xuất">Đăng xuất</a>
+            <div class="user-menu-container">
+                <button class="user-menu-button">
+                    Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div class="user-menu-dropdown">
+                    <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</a>
+                    <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Quản lý tin đăng</a>
+                    <a href="calculator.html"><i class="fa-solid fa-calculator"></i> Công cụ tính giá</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                </div>
+            </div>
         `;
+
+        // Thêm logic để đóng/mở dropdown
+        const menuButton = authStatusDiv.querySelector('.user-menu-button');
+        const dropdown = authStatusDiv.querySelector('.user-menu-dropdown');
+        
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+            dropdown.classList.toggle('show');
+        });
+
+        // Gắn sự kiện cho nút đăng xuất
         document.getElementById('logout-link').addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userName');
             alert("Bạn đã đăng xuất thành công!");
-            window.location.reload();
+            window.location.href = 'index.html'; // Chuyển về trang chủ sau khi đăng xuất
         });
+
     } else {
-        // Giao diện khi chưa đăng nhập
+        // Giao diện khi chưa đăng nhập (giữ nguyên)
         authStatusDiv.innerHTML = `
             <a href="Account.html">Đăng nhập</a> / <a href="Account.html">Đăng ký</a>
         `;
     }
+    
+    // Thêm sự kiện để đóng dropdown khi click ra ngoài
+    window.addEventListener('click', () => {
+        const dropdown = authStatusDiv.querySelector('.user-menu-dropdown');
+        if (dropdown && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        }
+    });
 }
 
 /**
@@ -41,17 +71,23 @@ function updateAuthState() {
  */
 function handleAccountPage() {
     const authForm = document.getElementById('authForm');
-    if (!authForm) return; // Nếu không có form, thoát hàm
+    if (!authForm) return;
 
     const signInBtn = document.getElementById('signInBtn');
     const signUpBtn = document.getElementById('signUpBtn');
     const signUpFields = document.getElementById('signUpFields');
     const submitBtn = document.getElementById('submitBtn');
 
+    // --- MÔ PHỎNG CƠ SỞ DỮ LIỆU NGƯỜI DÙNG ---
+    // Lấy danh sách người dùng từ localStorage, nếu không có thì tạo mảng rỗng
+    const getUsers = () => JSON.parse(localStorage.getItem('ecoUsers')) || [];
+    const saveUsers = (users) => localStorage.setItem('ecoUsers', JSON.stringify(users));
+
     let isSignUp = false;
 
     function setMode(signUp) {
         isSignUp = signUp;
+        // ... (phần code chuyển đổi giao diện giữ nguyên)
         const nameInput = document.getElementById('name');
         const lastNameInput = document.getElementById('lastName');
 
@@ -77,25 +113,58 @@ function handleAccountPage() {
 
     authForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        const email = document.getElementById('email').value;
-        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const password = document.getElementById('password').value;
+        const users = getUsers();
 
         if (isSignUp) {
-            // Logic Đăng Ký
-            alert(`Tài khoản cho ${name} đã được tạo thành công!\nBây giờ, hãy đăng nhập để tiếp tục.`);
+            // --- LOGIC ĐĂNG KÝ MỚI ---
+            const name = document.getElementById('name').value.trim();
+            const role = document.querySelector('input[name="role"]:checked').value;
+
+            // Kiểm tra email đã tồn tại chưa
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                alert('Email này đã được sử dụng. Vui lòng chọn email khác.');
+                return;
+            }
+
+            // Thêm người dùng mới vào "cơ sở dữ liệu"
+            const newUser = { email, password, name, role };
+            users.push(newUser);
+            saveUsers(users);
+
+            alert(`Đăng ký thành công với vai trò "${role === 'vendor' ? 'Người bán' : 'Khách hàng'}"!\nVui lòng đăng nhập để tiếp tục.`);
             setMode(false);
             authForm.reset();
             document.getElementById('email').value = email;
             document.getElementById('password').focus();
+
         } else {
-            // Logic Đăng Nhập
-            alert(`Đăng nhập thành công với email ${email}!`);
-            const inferredName = name || email.split('@')[0];
+            // --- LOGIC ĐĂNG NHẬP MỚI ---
+            const foundUser = users.find(user => user.email === email);
+
+            if (!foundUser || foundUser.password !== password) {
+                alert('Email hoặc mật khẩu không chính xác.');
+                return;
+            }
+
+            // Đăng nhập thành công, lưu thông tin phiên làm việc
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userName', inferredName);
-            window.location.href = 'index.html';
+            localStorage.setItem('userName', foundUser.name);
+            localStorage.setItem('userRole', foundUser.role); // <-- LƯU ROLE
+
+            alert(`Đăng nhập thành công!`);
+
+            // PHÂN LUỒNG CHUYỂN HƯỚNG DỰA TRÊN ROLE
+            if (foundUser.role === 'vendor') {
+                window.location.href = 'dashboard.html'; // Chuyển đến trang dashboard
+            } else {
+                window.location.href = 'index.html'; // Chuyển về trang chủ
+            }
         }
     });
+
 
     document.getElementById('googleBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Google đang được phát triển.'));
     document.getElementById('facebookBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Facebook đang được phát triển.'));

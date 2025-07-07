@@ -1,16 +1,25 @@
 // js/post-ad.js
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM ELEMENTS ---
-    const categoryModal = document.getElementById('category-modal');
-    const categoryList = document.querySelector('.category-list');
-    const postFormContainer = document.getElementById('post-form-container');
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        alert("Vui lòng đăng nhập để sử dụng chức năng này.");
+        window.location.href = 'Account.html'; 
+        return; 
+    }
+   // --- DOM ELEMENTS ---
     const postForm = document.getElementById('post-form');
+    const urlParams = new URLSearchParams(window.location.search);
+    const postIdToEdit = urlParams.get('edit');
+    const isEditMode = postIdToEdit !== null;
+    
+    const submitBtn = document.getElementById('submit-btn');
+    const categoryModal = document.getElementById('category-modal');
+    const postFormContainer = document.getElementById('post-form-container');
     const stickyActionBar = document.getElementById('sticky-actions-bar');
     const selectedCategoryDisplay = document.getElementById('selected-category-display');
     const dynamicFieldsContainer = document.getElementById('dynamic-fields-container');
     const imageInput = document.getElementById('image-input');
     const imagePreview = document.getElementById('image-preview');
-    const submitBtn = document.getElementById('submit-btn');
 
     // --- DATA: Định nghĩa các trường riêng cho mỗi danh mục ---
     const categorySpecificFields = {
@@ -40,7 +49,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FUNCTIONS ---
 
-    // Tạo HTML cho các trường động
+    function populateFormForEdit(postId) {
+        const allPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
+        const postToEdit = allPosts.find(post => post.id == postId);
+
+        if (!postToEdit) {
+            alert("Không tìm thấy tin đăng để sửa!");
+            window.location.href = 'my-posts.html';
+            return;
+        }
+
+        document.getElementById('title').value = postToEdit.title;
+        document.getElementById('description').value = postToEdit.description;
+        document.getElementById('price').value = postToEdit.price;
+        selectedCategoryDisplay.value = postToEdit.categoryName;
+        
+        generateDynamicFields(postToEdit.category);
+        
+        imagePreview.innerHTML = '';
+        postToEdit.images.forEach(imgSrc => {
+            const div = document.createElement('div');
+            div.className = 'preview-image-container';
+            div.innerHTML = `<img src="${imgSrc}" alt="preview"><button type="button" class="remove-image-btn">×</button>`;
+            imagePreview.appendChild(div);
+        });
+
+        document.title = "Sửa Tin Đăng - ECOCYCLE";
+        submitBtn.textContent = "Cập nhật tin";
+        categoryModal.classList.add('hidden'); 
+        postFormContainer.classList.remove('hidden');
+        stickyActionBar.classList.remove('hidden');
+        validateForm();
+    }
+
     function generateDynamicFields(category) {
         dynamicFieldsContainer.innerHTML = '';
         const fields = categorySpecificFields[category] || [];
@@ -80,20 +121,18 @@ document.addEventListener('DOMContentLoaded', () => {
         validateForm();
     }
 
-    // Kiểm tra form hợp lệ để bật/tắt nút Đăng tin
     function validateForm() {
-        // Lấy giá trị trực tiếp từ các trường quan trọng
         const titleValue = document.getElementById('title').value.trim();
         const descriptionValue = document.getElementById('description').value.trim();
         const hasImage = imagePreview.children.length > 0;
 
-        // Điều kiện mới: Chỉ cần tiêu đề, mô tả có chữ và có ít nhất 1 ảnh
         const isFormValid = titleValue.length > 0 && descriptionValue.length > 0 && hasImage;
 
-        // Bật/tắt nút dựa trên điều kiện
         submitBtn.disabled = !isFormValid;
     }
-
+    if (isEditMode) {
+        populateFormForEdit(postIdToEdit);
+    }
     // --- EVENT LISTENERS ---
 
     // Chọn danh mục
@@ -104,25 +143,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = selectedLi.dataset.category;
         const categoryName = selectedLi.dataset.categoryName;
 
-        // Cập nhật UI
         selectedCategoryDisplay.value = categoryName;
         generateDynamicFields(category);
         categoryModal.classList.add('hidden');
         postFormContainer.classList.remove('hidden');
         stickyActionBar.classList.remove('hidden');
         
-        // Gắn data-category vào form để dùng lúc submit
         postForm.dataset.category = category;
         postForm.dataset.categoryName = categoryName;
 
-        // Kiểm tra lại form sau khi tạo trường
         validateForm();
     });
 
-    // Upload ảnh
     imageInput.addEventListener('change', handleImagePreview);
 
-    // Xóa ảnh preview
     imagePreview.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-image-btn')) {
             e.target.closest('.preview-image-container').remove();
@@ -130,38 +164,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Validate form khi người dùng nhập liệu
     postForm.addEventListener('input', validateForm);
 
-    // Submit form
     postForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // 1. Thu thập dữ liệu từ form
+        const allPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
         const formData = new FormData(postForm);
-        const adData = {
-            id: Date.now(),
-            category: postForm.dataset.category,
-            categoryName: postForm.dataset.categoryName,
-            title: formData.get('title'),
-            description: formData.get('description'),
-            price: formData.get('price'),
-            images: [],
-            postDate: new Date().toLocaleDateString('vi-VN')
-        };
+        const loggedInUser = localStorage.getItem('userName');
         
-        // Lấy ảnh từ preview
-        document.querySelectorAll('.preview-image-container img').forEach(img => {
-            adData.images.push(img.src);
-        });
+        const images = [];
+        document.querySelectorAll('.preview-image-container img').forEach(img => images.push(img.src));
 
-        // 2. Lưu vào localStorage
-        const existingPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
-        existingPosts.unshift(adData); // Thêm vào đầu mảng
-        localStorage.setItem('userPosts', JSON.stringify(existingPosts));
+        if (isEditMode) {
+            const postIndex = allPosts.findIndex(post => post.id == postIdToEdit);
+            if (postIndex > -1) {
+                allPosts[postIndex].title = formData.get('title');
+                allPosts[postIndex].description = formData.get('description');
+                allPosts[postIndex].price = formData.get('price');
+                allPosts[postIndex].images = images;
+            }
+            localStorage.setItem('userPosts', JSON.stringify(allPosts));
+            alert('Cập nhật tin đăng thành công!');
+            window.location.href = 'my-posts.html'; 
 
-        // 3. Thông báo và chuyển hướng
-        alert('Đăng tin thành công!');
-        window.location.href = 'index.html';
+        } else {
+            const adData = {
+                id: Date.now(),
+                author: loggedInUser,
+                category: postForm.dataset.category,
+                categoryName: selectedCategoryDisplay.value,
+                title: formData.get('title'),
+                description: formData.get('description'),
+                price: formData.get('price'),
+                images: images,
+                postDate: new Date().toLocaleDateString('vi-VN')
+            };
+            allPosts.unshift(adData);
+            localStorage.setItem('userPosts', JSON.stringify(allPosts));
+            alert('Đăng tin thành công!');
+            
+            const userRole = localStorage.getItem('userRole');
+            window.location.href = userRole === 'vendor' ? 'dashboard.html' : 'index.html';
+        }
     });
 });

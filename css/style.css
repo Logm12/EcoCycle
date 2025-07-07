@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;700&display=swap');
 
 :root {
-    --primary-color: #28a745; /* Green */
-    --secondary-color: #007bff; /* Blue */
-    --accent-color: #ffc107; /* Yellow */
+    --primary-color: #28a745;
+    --secondary-color: #007bff; 
+    --accent-color: #ffc107; 
     --text-color: #333;
     --light-gray: #f8f9fa;
     --dark-gray: #343a40;
@@ -52,7 +52,7 @@ ul {
 }
 
 .btn:hover {
-    background-color: #218838; /* Darker green */
+    background-color: #218838;
 }
 
 .section-title {
@@ -83,7 +83,7 @@ ul {
 }
 .header-top {
     background-color: var(--primary-color);
-    color: var(--white); /* Đổi màu chữ thành trắng */
+    color: var(--white); 
     padding: 8px 0;
     font-size: 0.9rem;
     border-bottom: 1px solid #218838; 
@@ -273,6 +273,7 @@ nav.main-nav .dropdown-menu li a:hover {
 .hero {
     background: 
         url('/images/banner.png') no-repeat center center/cover; 
+    
     height: 600px;
     display: flex;
     align-items: center;
@@ -281,7 +282,7 @@ nav.main-nav .dropdown-menu li a:hover {
 }
 
 .hero .btn {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); 
     color: var(--text-color); 
     font-size: 1.1rem;
     padding: 15px 35px;
@@ -290,9 +291,9 @@ nav.main-nav .dropdown-menu li a:hover {
 }
 
 .hero .btn:hover {
-    background-color: #e0a800; /* Màu vàng đậm hơn khi hover */
+    background-color: #e0a800; 
     color: var(--text-color);
-    transform: translateY(-2px); /* Hiệu ứng nhấc lên khi hover */
+    transform: translateY(-2px); 
     transition: all 0.2s ease-in-out;
 }
 
@@ -442,6 +443,24 @@ section {
     color: var(--text-color);
 }
 
+/* Stats Section */
+.stats {
+    background: url('https://via.placeholder.com/1920x400.png?text=Background') no-repeat center center/cover;
+    color: var(--white);
+    text-align: center;
+}
+.stats .container {
+    display: flex;
+    justify-content: space-around;
+}
+.stat-item h2 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+.stat-item p {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
 
 /* Posts Section */
 .post-header {
@@ -568,7 +587,7 @@ section {
 }
 .swiper {
     width: 100%;
-    padding: 20px 0; /* Thêm khoảng đệm để không bị quá sát */
+    padding: 20px 0; 
 }
 
 .swiper-slide {
@@ -579,8 +598,8 @@ section {
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--primary-color); /* Đổi màu mũi tên thành màu xanh lá */
-    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
+    color: var(--primary-color); 
+    background-color: rgba(255, 255, 255, 0.8); 
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -594,9 +613,84 @@ section {
     color: var(--white);
 }
 
-/* Điều chỉnh kích thước icon mũi tên */
 .swiper-button-next::after,
 .swiper-button-prev::after {
     font-size: 1.2rem;
     font-weight: bold;
+}
+.user-menu-container {
+    position: relative;
+}
+
+.user-menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-menu-button strong {
+    color: var(--secondary-color);
+}
+
+.user-menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 150%; 
+    right: 0;
+    background-color: var(--white);
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1002;
+    border-radius: 8px;
+    padding: 10px 0;
+    border: 1px solid #eee;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+}
+
+.user-menu-dropdown.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-menu-dropdown a {
+    color: var(--text-color);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: flex; 
+    align-items: center;
+    gap: 15px; 
+    font-size: 0.95rem;
+}
+
+.user-menu-dropdown a i {
+    width: 16px; 
+    text-align: center;
+    color: #888;
+}
+
+.user-menu-dropdown a:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.user-menu-dropdown .dropdown-divider {
+    height: 1px;
+    margin: 8px 0;
+    overflow: hidden;
+    background-color: var(--border-color);
+}
+
+#logout-link {
+    color: #dc3545 !important; 
 }

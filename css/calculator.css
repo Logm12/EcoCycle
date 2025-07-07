@@ -1,0 +1,50 @@
+/* css/calculator.css */
+.calculator-wrapper {
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.calculator-form .form-group {
+    margin-bottom: 25px;
+}
+
+.calculator-form label {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.calculator-form select, .calculator-form input {
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+.calculator-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
+#calculation-result {
+    margin-top: 30px;
+    background-color: #e7f3ff;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    display: none; /* Mặc định ẩn */
+}
+
+#calculation-result h3 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+#estimated-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}

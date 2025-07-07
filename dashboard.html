@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển - ECOCYCLE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css"> <!-- Link CSS mới -->
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main style="padding: 40px 0;">
+        <div class="container">
+            <div class="welcome-message">
+                <h1 id="welcome-message">Bảng Điều Khiển Cá Nhân</h1>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <div class="stat-info">
+                        <div id="total-posts-stat" class="stat-number">0</div>
+                        <div class="stat-label">Tổng số tin đã đăng</div>
+                    </div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, var(--secondary-color), #0056b3);">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <div class="stat-info">
+                        <div id="total-value-stat" class="stat-number">0 đ</div>
+                        <div class="stat-label">Tổng giá trị tin đăng</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Hành động nhanh</h3>
+                <a href="post-ad.html" class="btn">Đăng tin mới</a>
+                <a href="my-posts.html" class="btn" style="background-color: #6c757d;">Quản lý tất cả tin</a>
+            </div>
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="js/templates.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/dashboard.js"></script> <!-- Link JS mới -->
+</body>
+</html>

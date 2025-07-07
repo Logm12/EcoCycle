@@ -1,0 +1,38 @@
+/* css/dashboard.css */
+.welcome-message {
+    margin-bottom: 40px;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+.stat-card {
+    background: linear-gradient(135deg, var(--primary-color), #218838);
+    color: var(--white);
+    padding: 25px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.stat-card i {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+.stat-info .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.stat-info .stat-label {
+    font-size: 1rem;
+}
+.quick-actions {
+    padding: 20px;
+    background: var(--light-gray);
+    border-radius: 8px;
+}
+.quick-actions h3 {
+    margin-bottom: 20px;
+}

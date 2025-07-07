@@ -1,0 +1,47 @@
+/* css/my-posts.css */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.my-post-card {
+    display: flex;
+    gap: 20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    align-items: center;
+}
+.my-post-card img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.my-post-info {
+    flex-grow: 1;
+}
+.my-post-info h3 {
+    margin-bottom: 10px;
+}
+.my-post-info p {
+    color: #666;
+    margin-bottom: 5px;
+}
+.my-post-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.my-post-actions .btn {
+    padding: 8px 15px;
+    min-width: 100px;
+    text-align: center;
+}
+.btn-delete {
+    background-color: #dc3545;
+}
+.btn-delete:hover {
+    background-color: #c82333;
+}
