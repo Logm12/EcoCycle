@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
         }
 
         // Endpoint của Gemini Pro. Lưu ý key được truyền qua URL.
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`;
 
         const response = await fetch(API_URL, {
             method: 'POST',
