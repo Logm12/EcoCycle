@@ -276,7 +276,7 @@ nav.main-nav .dropdown-menu li a:hover {
     height: 600px;
     display: flex;
     align-items: center;
-    color: var(--white); /* Đảm bảo chữ luôn có màu trắng */
+    color: var(--white); 
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7); 
 }
 
@@ -286,7 +286,7 @@ nav.main-nav .dropdown-menu li a:hover {
     font-size: 1.1rem;
     padding: 15px 35px;
     border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Thêm bóng đổ cho nút */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
 }
 
 .hero .btn:hover {
@@ -442,24 +442,6 @@ section {
     color: var(--text-color);
 }
 
-/* Stats Section */
-.stats {
-    background: url('https://via.placeholder.com/1920x400.png?text=Background') no-repeat center center/cover;
-    color: var(--white);
-    text-align: center;
-}
-.stats .container {
-    display: flex;
-    justify-content: space-around;
-}
-.stat-item h2 {
-    font-size: 4rem;
-    font-weight: 700;
-}
-.stat-item p {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
 
 /* Posts Section */
 .post-header {
