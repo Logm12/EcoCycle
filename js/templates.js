@@ -13,7 +13,9 @@ async function fetchHtmlAsText(filePath) {
     return response.text();
 }
 
-
+/**
+ * Hàm chính để tải và chèn các thành phần chung (header, footer).
+ */
 async function loadCommonComponents() {
     try {
         const [headerHtml, footerHtml] = await Promise.all([
@@ -42,7 +44,8 @@ async function loadCommonComponents() {
     }
 }
 
-
+/**
+ */
 function setActiveNavLink() {
     const currentPath = window.location.pathname; 
 

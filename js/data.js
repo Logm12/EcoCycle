@@ -1,4 +1,5 @@
 // js/data.js
+// NGUỒN DỮ LIỆU TRUNG TÂM CHO TOÀN BỘ DỰ ÁN
 
 const priceData = [
     { name: "Sắt đặc", price: "8.000 - 22.000", note: "Nguyên chất, không lẫn tạp chất" },

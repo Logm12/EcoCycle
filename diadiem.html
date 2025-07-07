@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm Địa Điểm Gần Đây - Ecocycle</title>
     
+    <!-- CSS chung cho toàn trang (header, footer) -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- CSS dành riêng cho trang địa điểm -->
     <link rel="stylesheet" href="css/diadiem.css">
     
+    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- THƯ VIỆN BẢN ĐỒ LEAFLET.JS (BẮT BUỘC) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
 </head>
 <body>
 
+    <!-- ==================== HEADER PLACEHOLDER ==================== -->
     <div id="header-placeholder"></div>
 
     <main>
+        <!-- ==================== HERO SECTION ==================== -->
         <section class="hero-locations">
             <div class="container">
 
@@ -26,6 +32,7 @@
             </div>
         </section>
 
+        <!-- ==================== SEARCH & FILTER BLOCK ==================== -->
         <section id="search-section" class="search-filter-section">
             <div class="container">
                 <div class="main-search-bar">
@@ -65,28 +72,37 @@
             </div>
         </section>
 
+        <!-- ==================== MAP & RESULTS AREA ==================== -->
         <section class="results-section">
             <div class="map-results-wrapper">
+                <!-- Bản đồ tương tác -->
                 <div id="map-container">
+                    <!-- Bản đồ Leaflet sẽ được chèn vào đây -->
                 </div>
 
+                <!-- Danh sách kết quả -->
                 <div id="results-list-container">
                     <div id="results-list">
+                        <!-- Kết quả tìm kiếm sẽ được chèn vào đây bằng JavaScript -->
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ==================== FOOTER PLACEHOLDER ==================== -->
     <div id="footer-placeholder"></div>
 
+    <!-- JavaScript chung cho toàn trang -->
     <script src="js/templates.js"></script>
     <script src="js/script.js"></script>
     
+    <!-- THƯ VIỆN BẢN ĐỒ LEAFLET.JS (BẮT BUỘC) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
      
+    <!-- JavaScript dành riêng cho bản đồ và tìm kiếm -->
     <script src="js/map.js"></script>
 </body>
 </html>

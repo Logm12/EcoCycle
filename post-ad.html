@@ -13,11 +13,13 @@
 
     <div id="header-placeholder"></div>
 
+    <!-- STEP 1: MODAL CHỌN DANH MỤC -->
     <div id="category-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-modal-btn">×</button>
             <h2>CHỌN DANH MỤC</h2>
             <ul class="category-list">
+                <!-- JS sẽ dùng data-category để xác định -->
                 <li data-category="plastic-bottle" data-category-name="Chai Nhựa">
                     <i class="fa-solid fa-bottle-water"></i><span>Chai Nhựa</span><i class="fa-solid fa-chevron-right"></i>
                 </li>
@@ -40,6 +42,7 @@
         </div>
     </div>
 
+    <!-- STEP 2: FORM ĐĂNG TIN CHI TIẾT -->
     <main id="post-form-container" class="hidden">
         <div class="container">
             <form id="post-form">
@@ -55,9 +58,11 @@
                             <input type="file" id="image-input" accept="image/*" multiple hidden>
                         </div>
                         <div id="image-preview" class="image-preview-grid">
+                            <!-- Các ảnh preview sẽ được chèn vào đây -->
                         </div>
                     </div>
 
+                    <!-- Cột phải: Thông tin -->
                     <div class="form-col-right">
                         <div class="form-group">
                             <label>Danh Mục Tin Đăng *</label>
@@ -90,6 +95,7 @@
         </div>
     </main>
 
+    <!-- STEP 3: THANH HÀNH ĐỘNG DÍNH Ở DƯỚI -->
     <div id="sticky-actions-bar" class="sticky-actions hidden">
         <div class="container">
             <button type="button" class="btn btn-secondary">Lưu nháp</button>
@@ -99,6 +105,6 @@
 
     <script src="js/templates.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/post-ad.js"></script>
+    <script src="js/post-ad.js"></script> <!-- JS riêng cho trang này -->
 </body>
 </html>

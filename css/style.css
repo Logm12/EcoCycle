@@ -83,7 +83,7 @@ ul {
 }
 .header-top {
     background-color: var(--primary-color);
-    color: var(--white); 
+    color: var(--white); /* Đổi màu chữ thành trắng */
     padding: 8px 0;
     font-size: 0.9rem;
     border-bottom: 1px solid #218838; 
@@ -271,29 +271,31 @@ nav.main-nav .dropdown-menu li a:hover {
 
 
 .hero {
+    /* Kỹ thuật dùng linear-gradient để tạo lớp phủ màu đen mờ trên ảnh */
     background: 
-        url('/images/banner.png') no-repeat center center/cover;
+        url('/images/banner.png') no-repeat center center/cover; /* Ảnh nền mới */
     
     height: 600px;
     display: flex;
     align-items: center;
-    color: var(--white); 
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); 
+    color: var(--white); /* Đảm bảo chữ luôn có màu trắng */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Tăng độ đậm của bóng chữ một chút */
 }
 
+/* Thêm đoạn này để đổi màu nút "Liên hệ ngay" cho nổi bật trên nền ảnh */
 .hero .btn {
-    background-color: var(--accent-color);
-    color: var(--text-color); 
+    background-color: var(--accent-color); /* Đổi thành màu vàng nhấn */
+    color: var(--text-color); /* Chữ màu đen cho dễ đọc trên nền vàng */
     font-size: 1.1rem;
     padding: 15px 35px;
     border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Thêm bóng đổ cho nút */
 }
 
 .hero .btn:hover {
-    background-color: #e0a800; 
+    background-color: #e0a800; /* Màu vàng đậm hơn khi hover */
     color: var(--text-color);
-    transform: translateY(-2px); 
+    transform: translateY(-2px); /* Hiệu ứng nhấc lên khi hover */
     transition: all 0.2s ease-in-out;
 }
 
@@ -587,7 +589,7 @@ section {
 }
 .swiper {
     width: 100%;
-    padding: 20px 0; 
+    padding: 20px 0; /* Thêm khoảng đệm để không bị quá sát */
 }
 
 .swiper-slide {
@@ -598,8 +600,8 @@ section {
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--primary-color);
-    background-color: rgba(255, 255, 255, 0.8); 
+    color: var(--primary-color); /* Đổi màu mũi tên thành màu xanh lá */
+    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -613,6 +615,7 @@ section {
     color: var(--white);
 }
 
+/* Điều chỉnh kích thước icon mũi tên */
 .swiper-button-next::after,
 .swiper-button-prev::after {
     font-size: 1.2rem;

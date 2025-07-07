@@ -1,5 +1,6 @@
 /* css/post-ad.css */
 
+/* --- MODAL CHỌN DANH MỤC --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -83,12 +84,13 @@
     color: #ccc;
 }
 
+/* --- FORM ĐĂNG TIN --- */
 .hidden {
     display: none !important;
 }
 
 #post-form-container {
-    padding: 40px 0 120px;
+    padding: 40px 0 120px; /* Chừa khoảng trống cho sticky bar */
 }
 
 .form-grid {
@@ -104,6 +106,7 @@
     padding-bottom: 10px;
 }
 
+/* Image Uploader */
 .image-uploader .upload-box {
     border: 2px dashed var(--border-color);
     border-radius: 8px;
@@ -164,6 +167,7 @@
     line-height: 1;
 }
 
+/* Form fields */
 .form-group {
     margin-bottom: 20px;
 }
@@ -195,6 +199,7 @@
     margin-top: 5px;
 }
 
+/* --- THANH HÀNH ĐỘNG --- */
 .sticky-actions {
     position: fixed;
     bottom: 0;
@@ -220,6 +225,7 @@
     cursor: not-allowed;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;

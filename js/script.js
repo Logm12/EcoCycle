@@ -1,4 +1,11 @@
+// js/script.js
 
+/**
+ * ===================================================================
+ * HÀM XỬ LÝ TRẠNG THÁI XÁC THỰC (ĐĂNG NHẬP/ĐĂNG XUẤT)
+ * Được gọi bởi templates.js sau khi header được tải.
+ * ===================================================================
+ */
 function updateAuthState() {
     const authStatusDiv = document.getElementById('auth-status');
     if (!authStatusDiv) return;
@@ -7,6 +14,7 @@ function updateAuthState() {
     const userName = localStorage.getItem('userName') || 'bạn';
 
     if (isLoggedIn) {
+        // Giao diện khi đã đăng nhập
         authStatusDiv.innerHTML = `
             <span class="user-greeting">Chào, <strong>${userName}</strong></span>
             <a href="#" id="logout-link" title="Đăng xuất">Đăng xuất</a>
@@ -26,7 +34,11 @@ function updateAuthState() {
     }
 }
 
-
+/**
+ * ===================================================================
+ * HÀM XỬ LÝ LOGIC RIÊNG CHO TRANG TÀI KHOẢN (Account.html)
+ * ===================================================================
+ */
 function handleAccountPage() {
     const authForm = document.getElementById('authForm');
     if (!authForm) return; // Nếu không có form, thoát hàm
@@ -89,7 +101,11 @@ function handleAccountPage() {
     document.getElementById('facebookBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Facebook đang được phát triển.'));
 }
 
-
+/**
+ * ===================================================================
+ * HÀM TẢI VÀ HIỂN THỊ CÁC TIN ĐĂNG MỚI (TRÊN TRANG CHỦ)
+ * ===================================================================
+ */
 function loadUserPosts() {
     const postsGrid = document.getElementById('posts-grid');
     if (!postsGrid) return; // Nếu không có grid, thoát hàm
@@ -97,18 +113,20 @@ function loadUserPosts() {
     const userPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
 
     if (userPosts.length === 0) {
-
+        // Bạn có thể giữ lại các sản phẩm mẫu hoặc hiển thị thông báo
+        // Ở đây tôi chọn hiển thị thông báo để thấy rõ kết quả
         const featuredGrid = document.querySelector('.featured-products .product-grid');
-        if (featuredGrid) featuredGrid.style.display = 'none';
+        if (featuredGrid) featuredGrid.style.display = 'none'; // Ẩn bảng giá mẫu nếu có tin đăng
         
         postsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Chưa có tin đăng nào. Hãy là người đầu tiên đăng tin!</p>';
         return;
     }
 
+    // Nếu có tin đăng, ẩn bảng giá mẫu đi để không bị trùng lặp
     const featuredSection = document.querySelector('.featured-products');
     if(featuredSection) featuredSection.style.display = 'none';
 
-    postsGrid.innerHTML = ''; 
+    postsGrid.innerHTML = ''; // Xóa nội dung cũ
     userPosts.forEach(post => {
         const postCard = document.createElement('div');
         postCard.className = 'product-card';
@@ -126,8 +144,9 @@ function loadUserPosts() {
 
 function displayTopProducts() {
     const sliderWrapper = document.querySelector('#top-products-slider .swiper-wrapper');
-    if (!sliderWrapper) return;
+    if (!sliderWrapper) return; // Chỉ chạy nếu có slider
 
+    // Hàm helper để lấy giá trị số cao nhất từ chuỗi giá
     const getMaxValue = (priceString) => {
         if (typeof priceString !== 'string' || priceString.toLowerCase().includes('liên hệ')) {
             return 0;
@@ -136,10 +155,12 @@ function displayTopProducts() {
         return Math.max(...parts);
     };
 
+    // Sắp xếp dữ liệu và lấy top 10 sản phẩm (để slider có nhiều nội dung hơn)
     const sortedData = [...priceData].sort((a, b) => getMaxValue(b.price) - getMaxValue(a.price));
     const topProducts = sortedData.slice(0, 10);
 
-    sliderWrapper.innerHTML = '';
+    // Tạo HTML cho các slide và chèn vào wrapper
+    sliderWrapper.innerHTML = ''; // Xóa nội dung cũ
     topProducts.forEach(product => {
         
         const slideHTML = `
@@ -155,21 +176,27 @@ function displayTopProducts() {
         sliderWrapper.innerHTML += slideHTML;
     });
 
+    // Khởi tạo Swiper sau khi đã chèn HTML
     const swiper = new Swiper('#top-products-slider', {
-        loop: true, 
-        spaceBetween: 30,
+        // Các tùy chọn
+        loop: true, // Lặp lại vô tận
+        spaceBetween: 30, // Khoảng cách giữa các slide
 
+        // Responsive breakpoints
         breakpoints: {
+            // Khi chiều rộng màn hình >= 640px
             640: {
               slidesPerView: 2,
               spaceBetween: 20
             },
+            // Khi chiều rộng màn hình >= 1024px
             1024: {
               slidesPerView: 3,
               spaceBetween: 30
             }
         },
 
+        // Nút điều hướng
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',

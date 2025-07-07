@@ -1,33 +1,37 @@
+/* ==================== HERO SECTION FOR LOCATIONS PAGE ==================== */
 .hero-locations {
-    --hero-text-color: #FAF9F6; 
+    --hero-text-color: #FAF9F6; /* Màu chữ trắng ngà, ấm áp */
 
+    /* Thêm lớp phủ tối để chữ dễ đọc */
     background: 
-        url('/images/banner.png') no-repeat center center/cover;
+        url('/images/banner.png') no-repeat center center/cover; /* Ảnh nền mới, chất lượng cao */
     
     color: var(--hero-text-color);
     text-align: center;
-    padding: 100px 20px; 
+    padding: 100px 20px; /* Tăng padding cho cân đối hơn */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 450px; 
+    min-height: 450px; /* Đảm bảo banner có chiều cao tối thiểu */
 }
 
 
+/* Tùy chỉnh nút bấm để phù hợp với banner mới */
 .hero-locations .btn {
-    background-color: transparent; 
-    border: 2px solid var(--hero-text-color); 
-    color: var(--hero-text-color); 
+    background-color: transparent; /* Nền trong suốt */
+    border: 2px solid var(--hero-text-color); /* Viền màu trắng ngà */
+    color: var(--hero-text-color); /* Chữ màu trắng ngà */
     padding: 12px 30px;
     font-weight: 700;
     transition: all 0.3s ease;
 }
 
 .hero-locations .btn:hover {
-    background-color: var(--hero-text-color); 
-    color: #333; 
+    background-color: var(--hero-text-color); /* Khi hover, nền đổi thành màu trắng ngà */
+    color: #333; /* Chữ đổi thành màu đen cho dễ đọc */
 }
 
+/* ==================== SEARCH & FILTER BLOCK ==================== */
 .search-filter-section {
     background-color: var(--light-gray);
     padding: 40px 0;
@@ -89,15 +93,16 @@
     background-color: #fff;
 }
 
+/* ==================== MAP & RESULTS AREA ==================== */
 .results-section {
     padding: 40px 0;
 }
 
 .map-results-wrapper {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1fr; /* Map chiếm 2/3, List chiếm 1/3 */
     gap: 30px;
-    height: 75vh; 
+    height: 75vh; /* Chiều cao cố định */
 }
 
 #map-container {
@@ -109,7 +114,7 @@
 
 #results-list-container {
     height: 100%;
-    overflow-y: auto;
+    overflow-y: auto; /* Thêm thanh cuộn nếu danh sách dài */
     padding-right: 10px;
 }
 
@@ -129,6 +134,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* Style cho thẻ được chọn */
 .location-card.active {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
@@ -168,10 +174,10 @@
     margin-bottom: 15px;
     font-size: 1.5rem;
 }
-.scrap-types .fa-box { color: #8B4513; }
-.scrap-types .fa-bottle-water { color: #3498db; }
-.scrap-types .fa-microchip { color: #f39c12; } 
-.scrap-types .fa-magnet { color: #95a5a6; } 
+.scrap-types .fa-box { color: #8B4513; } /* Giấy */
+.scrap-types .fa-bottle-water { color: #3498db; } /* Nhựa */
+.scrap-types .fa-microchip { color: #f39c12; } /* Điện tử */
+.scrap-types .fa-magnet { color: #95a5a6; } /* Kim loại */
 
 .card-actions {
     display: flex;
@@ -199,18 +205,19 @@
     color: #888;
 }
 
+/* Responsive cho màn hình nhỏ */
 @media (max-width: 992px) {
     .map-results-wrapper {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột */
         height: auto;
     }
     #map-container {
-        height: 50vh; 
+        height: 50vh; /* Đặt chiều cao cố định cho map */
     }
     #results-list-container {
         margin-top: 30px;
         height: auto;
-        max-height: 60vh;
+        max-height: 60vh; /* Giới hạn chiều cao để không quá dài */
     }
 }
 

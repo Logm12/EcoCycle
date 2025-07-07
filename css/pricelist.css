@@ -1,7 +1,7 @@
 /* css/pricelist.css */
 
 main {
-    background-color: #f7f9fc;
+    background-color: #f7f9fc; /* Một màu nền xám rất nhạt */
     padding: 60px 0;
 }
 
@@ -21,6 +21,7 @@ main {
     color: var(--text-color);
 }
 
+/* --- BỘ LỌC --- */
 .price-filters {
     display: flex;
     gap: 15px;
@@ -63,11 +64,12 @@ main {
     padding: 12px 25px;
 }
 
+/* --- BẢNG GIÁ --- */
 .price-table-container {
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    overflow: hidden; 
+    overflow: hidden; /* Để bo góc hoạt động với table */
 }
 
 table {
@@ -92,11 +94,11 @@ th {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Zebra striping */
 }
 
 tbody tr:hover {
-    background-color: #eaf5ff;
+    background-color: #eaf5ff; /* Màu xanh dương nhạt khi hover */
 }
 
 td:first-child {
@@ -104,6 +106,7 @@ td:first-child {
     color: var(--secondary-color);
 }
 
+/* --- PHÂN TRANG --- */
 .pagination-container {
     display: flex;
     justify-content: space-between;
