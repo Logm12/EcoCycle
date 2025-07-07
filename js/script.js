@@ -12,53 +12,75 @@ function updateAuthState() {
 
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userName = localStorage.getItem('userName') || 'bạn';
+    const userRole = localStorage.getItem('userRole');
+
+    // Xóa nội dung cũ để chuẩn bị render UI mới
+    authStatusDiv.innerHTML = '';
 
     if (isLoggedIn) {
-        // Giao diện khi đã đăng nhập: TẠO MENU DROPDOWN
-        authStatusDiv.innerHTML = `
-            <div class="user-menu-container">
-                <button class="user-menu-button">
-                    Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
-                </button>
-                <div class="user-menu-dropdown">
-                    <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</a>
-                    <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Quản lý tin đăng</a>
-                    <a href="calculator.html"><i class="fa-solid fa-calculator"></i> Công cụ tính giá</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+        if (userRole === 'vendor') {
+            // --- GIAO DIỆN CHO NGƯỜI BÁN (VENDOR) ---
+            authStatusDiv.innerHTML = `
+                <div class="user-menu-container">
+                    <button class="user-menu-button">
+                        Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    <div class="user-menu-dropdown">
+                        <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</a>
+                        <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Quản lý tin đăng</a>
+                        <a href="calculator.html"><i class="fa-solid fa-calculator"></i> Công cụ tính giá</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        } else {
+            // --- GIAO DIỆN CHO KHÁCH HÀNG (CUSTOMER) ---
+            authStatusDiv.innerHTML = `
+                <div class="user-menu-container">
+                     <button class="user-menu-button">
+                        Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    <div class="user-menu-dropdown">
+                        <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Tin đăng của tôi</a>
+                        <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </div>
+                </div>
+            `;
+        }
 
-        // Thêm logic để đóng/mở dropdown
+        // Gắn sự kiện chung cho menu và logout (vì cả 2 role đều có)
         const menuButton = authStatusDiv.querySelector('.user-menu-button');
         const dropdown = authStatusDiv.querySelector('.user-menu-dropdown');
         
-        menuButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
-            dropdown.classList.toggle('show');
-        });
+        if(menuButton) {
+            menuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+        }
 
-        // Gắn sự kiện cho nút đăng xuất
-        document.getElementById('logout-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userName');
-            alert("Bạn đã đăng xuất thành công!");
-            window.location.href = 'index.html'; // Chuyển về trang chủ sau khi đăng xuất
-        });
+        const logoutLink = authStatusDiv.querySelector('#logout-link');
+        if(logoutLink) {
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.clear(); // Xóa hết để đảm bảo sạch sẽ
+                alert("Bạn đã đăng xuất thành công!");
+                window.location.href = 'index.html';
+            });
+        }
 
     } else {
-        // Giao diện khi chưa đăng nhập (giữ nguyên)
+        // --- GIAO DIỆN CHO KHÁCH (GUEST) ---
         authStatusDiv.innerHTML = `
             <a href="Account.html">Đăng nhập</a> / <a href="Account.html">Đăng ký</a>
         `;
     }
     
-    // Thêm sự kiện để đóng dropdown khi click ra ngoài
+    // Sự kiện đóng dropdown khi click ra ngoài (chạy cho mọi trường hợp)
     window.addEventListener('click', () => {
-        const dropdown = authStatusDiv.querySelector('.user-menu-dropdown');
-        if (dropdown && dropdown.classList.contains('show')) {
+        const dropdown = authStatusDiv.querySelector('.user-menu-dropdown.show');
+        if (dropdown) {
             dropdown.classList.remove('show');
         }
     });
