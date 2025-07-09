@@ -6,6 +6,8 @@
  * Được gọi bởi templates.js sau khi header được tải.
  * ===================================================================
  */
+// js/script.js (Hàm updateAuthState hoàn chỉnh)
+
 function updateAuthState() {
     const authStatusDiv = document.getElementById('auth-status');
     if (!authStatusDiv) return;
@@ -14,17 +16,13 @@ function updateAuthState() {
     const userName = localStorage.getItem('userName') || 'bạn';
     const userRole = localStorage.getItem('userRole');
 
-    // Xóa nội dung cũ để chuẩn bị render UI mới
     authStatusDiv.innerHTML = '';
 
     if (isLoggedIn) {
         if (userRole === 'vendor') {
-            // --- GIAO DIỆN CHO NGƯỜI BÁN (VENDOR) ---
             authStatusDiv.innerHTML = `
                 <div class="user-menu-container">
-                    <button class="user-menu-button">
-                        Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
-                    </button>
+                    <button class="user-menu-button">Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i></button>
                     <div class="user-menu-dropdown">
                         <a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</a>
                         <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Quản lý tin đăng</a>
@@ -35,12 +33,9 @@ function updateAuthState() {
                 </div>
             `;
         } else {
-            // --- GIAO DIỆN CHO KHÁCH HÀNG (CUSTOMER) ---
             authStatusDiv.innerHTML = `
                 <div class="user-menu-container">
-                     <button class="user-menu-button">
-                        Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i>
-                    </button>
+                     <button class="user-menu-button">Chào, <strong>${userName}</strong> <i class="fa-solid fa-caret-down"></i></button>
                     <div class="user-menu-dropdown">
                         <a href="my-posts.html"><i class="fa-solid fa-list-check"></i> Tin đăng của tôi</a>
                         <a href="#" id="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
@@ -49,7 +44,6 @@ function updateAuthState() {
             `;
         }
 
-        // Gắn sự kiện chung cho menu và logout (vì cả 2 role đều có)
         const menuButton = authStatusDiv.querySelector('.user-menu-button');
         const dropdown = authStatusDiv.querySelector('.user-menu-dropdown');
         
@@ -64,20 +58,21 @@ function updateAuthState() {
         if(logoutLink) {
             logoutLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                localStorage.clear(); // Xóa hết để đảm bảo sạch sẽ
+                
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userRole');
+
                 alert("Bạn đã đăng xuất thành công!");
                 window.location.href = 'index.html';
             });
         }
 
     } else {
-        // --- GIAO DIỆN CHO KHÁCH (GUEST) ---
-        authStatusDiv.innerHTML = `
-            <a href="Account.html">Đăng nhập</a> / <a href="Account.html">Đăng ký</a>
-        `;
+        // GIAO DIỆN CHO KHÁCH (GUEST)
+        authStatusDiv.innerHTML = `<a href="Account.html">Đăng nhập</a> / <a href="Account.html">Đăng ký</a>`;
     }
     
-    // Sự kiện đóng dropdown khi click ra ngoài (chạy cho mọi trường hợp)
     window.addEventListener('click', () => {
         const dropdown = authStatusDiv.querySelector('.user-menu-dropdown.show');
         if (dropdown) {
