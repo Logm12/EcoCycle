@@ -70,21 +70,41 @@
         </section>
 
         <!-- ==================== MAP & RESULTS AREA ==================== -->
-        <section class="results-section">
-            <div class="map-results-wrapper">
-                <!-- Bản đồ tương tác -->
-                <div id="map-container">
-                    <!-- Bản đồ Leaflet sẽ được chèn vào đây -->
+<!-- diadiem.html (Thay thế section này) -->
+
+<!-- ==================== MAP & RESULTS AREA ==================== -->
+<section class="results-section">
+    <div class="map-results-wrapper">
+        <!-- Bản đồ tương tác (giữ nguyên) -->
+        <div id="map-container"></div>
+
+        <!-- Panel bên phải với các Tab -->
+        <div class="side-panel">
+            <div class="panel-tabs">
+                <button class="tab-btn active" data-tab="locations">
+                    <i class="fa-solid fa-store"></i> Địa điểm
+                </button>
+                <button class="tab-btn" data-tab="customers">
+                    <i class="fa-solid fa-users"></i> Khách hàng
+                </button>
+            </div>
+
+            <div class="panel-content">
+                <div id="locations-content" class="tab-content active">
+                    <div id="results-list-container">
+                        <div id="results-list">
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Danh sách kết quả -->
-                <div id="results-list-container">
-                    <div id="results-list">
-                        <!-- Kết quả tìm kiếm sẽ được chèn vào đây bằng JavaScript -->
+                <div id="customers-content" class="tab-content">
+                    <div id="customer-leaderboard-list">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </main>
 <!-- ==================== CHATBOT ==================== -->
 <button id="chatbot-toggle-btn" class="chatbot-toggler">
