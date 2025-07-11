@@ -104,7 +104,6 @@ function handleAccountPage() {
 
     function setMode(signUp) {
         isSignUp = signUp;
-        // ... (phần code chuyển đổi giao diện giữ nguyên)
         const nameInput = document.getElementById('name');
         const lastNameInput = document.getElementById('lastName');
 
@@ -134,53 +133,53 @@ function handleAccountPage() {
         const password = document.getElementById('password').value;
         const users = getUsers();
 
-        if (isSignUp) {
-            // --- LOGIC ĐĂNG KÝ MỚI ---
-            const name = document.getElementById('name').value.trim();
-            const role = document.querySelector('input[name="role"]:checked').value;
+    if (isSignUp) {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim(); 
+        const role = document.querySelector('input[name="role"]:checked').value;
 
-            // Kiểm tra email đã tồn tại chưa
-            const existingUser = users.find(user => user.email === email);
-            if (existingUser) {
-                alert('Email này đã được sử dụng. Vui lòng chọn email khác.');
-                return;
-            }
-
-            // Thêm người dùng mới vào "cơ sở dữ liệu"
-            const newUser = { email, password, name, role };
-            users.push(newUser);
-            saveUsers(users);
-
-            alert(`Đăng ký thành công với vai trò "${role === 'vendor' ? 'Người bán' : 'Khách hàng'}"!\nVui lòng đăng nhập để tiếp tục.`);
-            setMode(false);
-            authForm.reset();
-            document.getElementById('email').value = email;
-            document.getElementById('password').focus();
-
-        } else {
-            // --- LOGIC ĐĂNG NHẬP MỚI ---
-            const foundUser = users.find(user => user.email === email);
-
-            if (!foundUser || foundUser.password !== password) {
-                alert('Email hoặc mật khẩu không chính xác.');
-                return;
-            }
-
-            // Đăng nhập thành công, lưu thông tin phiên làm việc
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userName', foundUser.name);
-            localStorage.setItem('userRole', foundUser.role); // <-- LƯU ROLE
-
-            alert(`Đăng nhập thành công!`);
-
-            // PHÂN LUỒNG CHUYỂN HƯỚNG DỰA TRÊN ROLE
-            if (foundUser.role === 'vendor') {
-                window.location.href = 'dashboard.html'; // Chuyển đến trang dashboard
-            } else {
-                window.location.href = 'index.html'; // Chuyển về trang chủ
-            }
+        // Kiểm tra email đã tồn tại chưa
+        const existingUser = users.find(user => user.email === email);
+        if (existingUser) {
+            alert('Email này đã được sử dụng. Vui lòng chọn email khác.');
+            return;
         }
-    });
+
+        // Thêm người dùng mới vào "cơ sở dữ liệu"
+        const newUser = { email, password, name, phone, role }; 
+        users.push(newUser);
+        saveUsers(users);
+
+        alert(`Đăng ký thành công với vai trò "${role === 'vendor' ? 'Người bán' : 'Khách hàng'}"!\nVui lòng đăng nhập để tiếp tục.`);
+        setMode(false);
+        authForm.reset();
+        document.getElementById('email').value = email;
+        document.getElementById('password').focus();
+
+    } else {
+        // --- LOGIC ĐĂNG NHẬP MỚI ---
+        const foundUser = users.find(user => user.email === email);
+
+        if (!foundUser || foundUser.password !== password) {
+            alert('Email hoặc mật khẩu không chính xác.');
+            return;
+        }
+
+        // Đăng nhập thành công, lưu thông tin phiên làm việc
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', foundUser.name);
+        localStorage.setItem('userRole', foundUser.role); // <-- LƯU ROLE
+
+        alert(`Đăng nhập thành công!`);
+
+        // PHÂN LUỒNG CHUYỂN HƯỚNG DỰA TRÊN ROLE
+        if (foundUser.role === 'vendor') {
+            window.location.href = 'dashboard.html'; // Chuyển đến trang dashboard
+        } else {
+            window.location.href = 'index.html'; // Chuyển về trang chủ
+        }
+    }
+});
 
 
     document.getElementById('googleBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Google đang được phát triển.'));
@@ -230,9 +229,8 @@ function loadUserPosts() {
 
 function displayTopProducts() {
     const sliderWrapper = document.querySelector('#top-products-slider .swiper-wrapper');
-    if (!sliderWrapper) return; // Chỉ chạy nếu có slider
+    if (!sliderWrapper) return; 
 
-    // Hàm helper để lấy giá trị số cao nhất từ chuỗi giá
     const getMaxValue = (priceString) => {
         if (typeof priceString !== 'string' || priceString.toLowerCase().includes('liên hệ')) {
             return 0;
@@ -241,12 +239,10 @@ function displayTopProducts() {
         return Math.max(...parts);
     };
 
-    // Sắp xếp dữ liệu và lấy top 10 sản phẩm (để slider có nhiều nội dung hơn)
     const sortedData = [...priceData].sort((a, b) => getMaxValue(b.price) - getMaxValue(a.price));
     const topProducts = sortedData.slice(0, 10);
 
-    // Tạo HTML cho các slide và chèn vào wrapper
-    sliderWrapper.innerHTML = ''; // Xóa nội dung cũ
+    sliderWrapper.innerHTML = '';
     topProducts.forEach(product => {
         
         const slideHTML = `
@@ -289,10 +285,43 @@ function displayTopProducts() {
         },
     });
 }
+function initializeGlobalSearch() {
+    setTimeout(() => {
+        const searchBar = document.querySelector('.header-main .search-bar');
+        if (!searchBar) return;
 
+        const searchInput = searchBar.querySelector('input');
+        const searchButton = searchBar.querySelector('button');
+
+        const handleSearch = () => {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) return;
+
+            if (query.includes('giá') || query.includes('sắt') || query.includes('đồng') || query.includes('nhôm')) {
+                window.location.href = 'pricelist.html';
+            } else if (query.includes('bản đồ') || query.includes('địa điểm') || query.includes('gần đây')) {
+                window.location.href = 'diadiem.html';
+            } else if (query.includes('đăng') || query.includes('bán')) {
+                window.location.href = 'post-ad.html';
+            } else if (query.includes('về') || query.includes('giới thiệu') || query.includes('liên hệ')) {
+                window.location.href = 'about.html';
+            } else {
+                alert(`Không tìm thấy kết quả phù hợp cho từ khóa: "${searchInput.value}"`);
+            }
+        };
+
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    }, 500); // Chờ 0.5s để đảm bảo header đã được render
+}
 document.addEventListener('DOMContentLoaded', function() {
     handleAccountPage();
     loadUserPosts();
 	displayTopProducts();
+    initializeGlobalSearch();
 
 });

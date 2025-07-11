@@ -33,54 +33,64 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // LOGIC CHO TAB "ĐỊA ĐIỂM" (TÌM KIẾM VỰA PHẾ LIỆU)
     // ===================================================================
-    function initializeLocationFinder() {
-        const resultsList = document.getElementById('results-list');
-        if (!resultsList) return;
+function initializeLocationFinder() {
+    const resultsList = document.getElementById('results-list');
+    if (!resultsList) return;
 
-        // Dữ liệu mẫu các địa điểm thu mua lớn
-        const locationsData = [
-            { id: 1, name: "Vựa Phế Liệu Thuận Phát", address: "123 Đường Giải Phóng, Hai Bà Trưng, Hà Nội", lat: 21.0047, lng: 105.8431, types: ["metal", "plastic"], rating: 4.5 },
-            { id: 2, name: "Điểm Thu Mua Giấy Cô Lan", address: "45 Ngõ Tự Do, Cầu Giấy, Hà Nội", lat: 21.0333, lng: 105.7950, types: ["paper"], rating: 4.8 },
-            { id: 3, name: "Tái Chế Đồ Điện Tử 24h", address: "88 Phố Huế, Hoàn Kiếm, Hà Nội", lat: 21.0165, lng: 105.8521, types: ["electronics", "metal"], rating: 4.2 },
-            { id: 4, name: "Kho Phế Liệu Minh Anh", address: "210 Nguyễn Trãi, Thanh Xuân, Hà Nội", lat: 20.9937, lng: 105.8114, types: ["metal", "paper", "plastic"], rating: 4.0 },
-            { id: 5, name: "Thu Mua Chai Lọ Nhựa", address: "15 Ngõ 120 Hoàng Quốc Việt, Cầu Giấy", lat: 21.0456, lng: 105.7999, types: ["plastic"], rating: 4.6 },
-            { id: 6, name: "Sắt Vụn Chú Hùng", address: "33 Đê La Thành, Đống Đa, Hà Nội", lat: 21.0228, lng: 105.8223, types: ["metal"], rating: 3.9 }
-        ];
+    // Lấy dữ liệu người bán từ localStorage
+    const allUsers = JSON.parse(localStorage.getItem('ecoUsers')) || [];
+    const vendors = allUsers.filter(user => user.role === 'vendor');
 
-        function renderLocationList(locations) {
-            resultsList.innerHTML = '';
-            if (locations.length === 0) {
-                resultsList.innerHTML = '<div class="no-results">Không tìm thấy địa điểm nào phù hợp.</div>';
-                return;
-            }
-            locations.forEach(location => {
-                const card = document.createElement('div');
-                card.className = 'location-card'; // Sử dụng lại class CSS đã có
-                card.innerHTML = `<h3>${location.name}</h3><p>${location.address}</p>`;
-                resultsList.appendChild(card);
-            });
+    function renderVendorList(vendorList) {
+        resultsList.innerHTML = '';
+        if (vendorList.length === 0) {
+            resultsList.innerHTML = '<p style="text-align: center; color: #666;">Chưa có người bán nào đăng ký.</p>';
+            return;
         }
-
-        function renderMapMarkers(locations) {
-            markersLayer.clearLayers();
-            locations.forEach(location => {
-                L.marker([location.lat, location.lng]).addTo(markersLayer)
-                    .bindPopup(`<b>${location.name}</b><br>${location.address}`);
-            });
-        }
-
-        function applyLocationFilters() {
-            // Ở đây bạn có thể thêm logic đọc từ các ô filter như trước
-            // Ví dụ: const searchTerm = document.getElementById('address-input').value;
-            // Hiện tại, chúng ta sẽ hiển thị tất cả
-            renderLocationList(locationsData);
-            renderMapMarkers(locationsData);
-        }
-
-        // Chạy lần đầu cho tab địa điểm
-        applyLocationFilters();
+        vendorList.forEach(vendor => {
+            const card = document.createElement('div');
+            card.className = 'location-card'; // Tái sử dụng class CSS
+            card.innerHTML = `
+                <h3>${vendor.name}</h3>
+                <p><i class="fa-solid fa-phone"></i> <strong>SĐT:</strong> ${vendor.phone || 'Chưa cập nhật'}</p>
+                <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> ${vendor.email}</p>
+            `;
+            resultsList.appendChild(card);
+        });
     }
 
+    // Hiển thị danh sách ban đầu
+    renderVendorList(vendors);
+
+}
+
+// Các hàm cho tab địa điểm (nếu cần dùng dữ liệu locationsData, bạn cần định nghĩa nó)
+function renderMapMarkers(locations) {
+    markersLayer.clearLayers();
+    locations.forEach(location => {
+        L.marker([location.lat, location.lng]).addTo(markersLayer)
+            .bindPopup(`<b>${location.name}</b><br>${location.address}`);
+    });
+}
+
+function renderLocationList(locations) {
+    // Bạn cần định nghĩa hàm này nếu muốn hiển thị danh sách địa điểm
+    // Ví dụ: giống như renderVendorList nhưng cho dữ liệu locations
+}
+
+function applyLocationFilters() {
+    // Ở đây bạn có thể thêm logic đọc từ các ô filter như trước
+    // Ví dụ: const searchTerm = document.getElementById('address-input').value;
+    // Hiện tại, chúng ta sẽ hiển thị tất cả
+    if (typeof locationsData !== 'undefined') {
+        renderLocationList(locationsData);
+        renderMapMarkers(locationsData);
+    }
+}
+
+// Chạy lần đầu cho tab địa điểm
+applyLocationFilters();
+    
     // ===================================================================
     // LOGIC CHO TAB "KHÁCH HÀNG" (LEADERBOARD ĐỘNG)
     // ===================================================================
