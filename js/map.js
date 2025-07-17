@@ -1,178 +1,109 @@
-// js/map.js (PHIÊN BẢN HOÀN CHỈNH VỚI TABS VÀ LEADERBOARD)
+// js/map.js (PHIÊN BẢN HOÀN CHỈNH VỚI MAP INTERACTION)
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- KHỞI TẠO CHUNG ---
+    // --- KHỞI TẠO BẢN ĐỒ VÀ CÁC BIẾN TOÀN CỤC ---
     const mapContainer = document.getElementById('map-container');
-    if (!mapContainer) return; // Thoát nếu không phải trang địa điểm
+    if (!mapContainer) return;
 
-    const map = L.map(mapContainer).setView([21.0285, 105.8542], 13);
-    const markersLayer = L.layerGroup().addTo(map); // Lớp để chứa các marker địa điểm
+    const map = L.map(mapContainer).setView([21.0285, 105.8542], 12); // Zoom ra xa hơn một chút
+    const markersLayer = L.layerGroup().addTo(map);
+    let markers = {}; // Object để lưu trữ các marker theo ID
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // ===================================================================
-    // LOGIC CHUYỂN TAB
-    // ===================================================================
-    function initializeTabSwitching() {
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
+    // --- LOGIC CHO BẢNG TIN GIAO DỊCH ---
+    const tradingBoardList = document.getElementById('trading-board-list');
+    if (!tradingBoardList) return;
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                button.classList.add('active');
-                const tabId = button.dataset.tab;
-                document.getElementById(`${tabId}-content`).classList.add('active');
-            });
-        });
-    }
-
-    // ===================================================================
-    // LOGIC CHO TAB "ĐỊA ĐIỂM" (TÌM KIẾM VỰA PHẾ LIỆU)
-    // ===================================================================
-function initializeLocationFinder() {
-    const resultsList = document.getElementById('results-list');
-    if (!resultsList) return;
-
-    // Lấy dữ liệu người bán từ localStorage
-    const allUsers = JSON.parse(localStorage.getItem('ecoUsers')) || [];
-    const vendors = allUsers.filter(user => user.role === 'vendor');
-
-    function renderVendorList(vendorList) {
-        resultsList.innerHTML = '';
-        if (vendorList.length === 0) {
-            resultsList.innerHTML = '<p style="text-align: center; color: #666;">Chưa có người bán nào đăng ký.</p>';
-            return;
-        }
-        vendorList.forEach(vendor => {
-            const card = document.createElement('div');
-            card.className = 'location-card'; // Tái sử dụng class CSS
-            card.innerHTML = `
-                <h3>${vendor.name}</h3>
-                <p><i class="fa-solid fa-phone"></i> <strong>SĐT:</strong> ${vendor.phone || 'Chưa cập nhật'}</p>
-                <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> ${vendor.email}</p>
-            `;
-            resultsList.appendChild(card);
-        });
-    }
-
-    // Hiển thị danh sách ban đầu
-    renderVendorList(vendors);
-
-}
-
-// Các hàm cho tab địa điểm (nếu cần dùng dữ liệu locationsData, bạn cần định nghĩa nó)
-function renderMapMarkers(locations) {
-    markersLayer.clearLayers();
-    locations.forEach(location => {
-        L.marker([location.lat, location.lng]).addTo(markersLayer)
-            .bindPopup(`<b>${location.name}</b><br>${location.address}`);
-    });
-}
-
-function renderLocationList(locations) {
-    // Bạn cần định nghĩa hàm này nếu muốn hiển thị danh sách địa điểm
-    // Ví dụ: giống như renderVendorList nhưng cho dữ liệu locations
-}
-
-function applyLocationFilters() {
-    // Ở đây bạn có thể thêm logic đọc từ các ô filter như trước
-    // Ví dụ: const searchTerm = document.getElementById('address-input').value;
-    // Hiện tại, chúng ta sẽ hiển thị tất cả
-    if (typeof locationsData !== 'undefined') {
-        renderLocationList(locationsData);
-        renderMapMarkers(locationsData);
-    }
-}
-
-// Chạy lần đầu cho tab địa điểm
-applyLocationFilters();
+    // 1. TẠO DỮ LIỆU MÔ PHỎNG (SIMULATION DATA) VỚI TỌA ĐỘ
+    const registeredUsers = JSON.parse(localStorage.getItem('ecoUsers')) || [];
+    const simulationData = [
+        { id: 1, name: "Vựa phế liệu Hoàng Mai", role: "vendor", item: "Sắt đặc", quantity: 15000, price_per_kg: 10000, location_name: "Khu công nghiệp Vĩnh Tuy, Hoàng Mai, Hà Nội", lat: 20.993, lng: 105.868 },
+        { id: 2, name: "Công ty Môi Trường Xanh", role: "vendor", item: "Đồng cáp", quantity: 8500, price_per_kg: 180000, location_name: "Cụm công nghiệp Cầu Giấy, Hà Nội", lat: 21.038, lng: 105.783 },
+        { id: 3, name: "Anh Tuấn", role: "customer", item: "Giấy carton", quantity: 2500, price_per_kg: 4000, location_name: "Phố cổ, Hoàn Kiếm, Hà Nội", lat: 21.034, lng: 105.852 },
+        { id: 4, name: "Tái chế Thăng Long", role: "vendor", item: "Nhựa PP", quantity: 12000, price_per_kg: 15000, location_name: "Khu công nghiệp Sài Đồng B, Long Biên, Hà Nội", lat: 21.037, lng: 105.915 },
+        { id: 5, name: "Chị Hoa", role: "customer", item: "100 vỏ lon nhôm", quantity: 100, price_per_kg: 250, location_name: "Khu đô thị Times City, Hai Bà Trưng, Hà Nội", lat: 21.005, lng: 105.869 },
+        { id: 6, name: "Hợp tác xã Đồng Nát", role: "vendor", item: "Inox 304", quantity: 7000, price_per_kg: 45000, location_name: "Cụm công nghiệp Từ Liêm, Hà Nội", lat: 21.045, lng: 105.745 },
+        { id: 7, name: "Anh Minh", role: "customer", item: "5kg Dây điện cũ", quantity: 5, price_per_kg: 90000, location_name: "Làng lụa Vạn Phúc, Hà Đông, Hà Nội", lat: 20.963, lng: 105.778 },
+    ];
     
-    // ===================================================================
-    // LOGIC CHO TAB "KHÁCH HÀNG" (LEADERBOARD ĐỘNG)
-    // ===================================================================
-    function initializeCustomerLeaderboard() {
-        const leaderboardList = document.getElementById('customer-leaderboard-list');
-        if (!leaderboardList) return;
+    // Gộp và xử lý dữ liệu
+    let tradingData = [...simulationData, ...registeredUsers.map((user, index) => ({
+        id: 100 + index, // Tạo ID duy nhất
+        ...user,
+        location_name: "Quận Thanh Xuân, Hà Nội",
+        lat: 20.998 + (Math.random() - 0.5) * 0.01, // Random tọa độ quanh một điểm
+        lng: 105.815 + (Math.random() - 0.5) * 0.01,
+        item: "Phế liệu tổng hợp",
+        quantity: Math.floor(Math.random() * 500) + 50,
+        price_per_kg: 5000
+    }))];
 
-        let allUsers = JSON.parse(localStorage.getItem('ecoUsers')) || [];
-        let customers = allUsers.filter(user => user.role === 'customer');
-        const sampleItems = ["5kg Đồng Vàng", "10kg Sắt vụn", "20kg Giấy carton", "5kg Dây điện cũ", "100 vỏ lon nhôm", "15kg Nhựa PP", "3kg Inox 304"];
-        
-        customers = customers.map((customer, index) => ({
-            ...customer,
-            selling: sampleItems[index % sampleItems.length],
-            status: 'pending'
-        }));
+    // 2. HÀM RENDER DANH SÁCH VÀ BẢN ĐỒ
+    function renderTradingBoard() {
+        // Sắp xếp theo số lượng giảm dần
+        tradingData.sort((a, b) => b.quantity - a.quantity);
+        const displayList = tradingData.slice(0, 8); // Luôn hiển thị 8 người đầu
 
-        function sortCustomers(customerList) {
-            return customerList.sort((a, b) => {
-                if (a.status === 'accepted' && b.status !== 'accepted') return -1;
-                if (b.status === 'accepted' && a.status !== 'accepted') return 1;
-                return 0;
-            });
-        }
+        tradingBoardList.innerHTML = '';
+        markersLayer.clearLayers();
+        markers = {}; // Reset object markers
 
-        function renderLeaderboard() {
-            leaderboardList.innerHTML = '';
-            const sorted = sortCustomers(customers);
-            const displayList = sorted.slice(0, 8); // Chỉ hiển thị 8 người
+        displayList.forEach(person => {
+            // A. TẠO MỤC TRONG DANH SÁCH
+            const card = document.createElement('div');
+            card.className = 'trading-card';
+            card.dataset.id = person.id; // Gán ID để liên kết
 
-            if (displayList.length === 0) {
-                leaderboardList.innerHTML = '<p style="text-align: center; color: #666;">Chưa có khách hàng nào đăng ký.</p>';
-                return;
-            }
+            const estimatedPrice = (person.quantity * person.price_per_kg).toLocaleString('vi-VN');
 
-            displayList.forEach(customer => {
-                const card = document.createElement('div');
-                card.className = 'customer-card';
-                if (customer.status === 'accepted') card.classList.add('accepted');
-                const isAccepted = customer.status === 'accepted';
-                card.innerHTML = `
-                    <div class="customer-avatar">${customer.name.charAt(0).toUpperCase()}</div>
-                    <div class="customer-info">
-                        <div class="name">${customer.name}</div>
-                        <div class="item">Đang bán: <strong>${customer.selling}</strong></div>
-                    </div>
-                    <div class="customer-action">
-                        <button class="btn-accept" data-email="${customer.email}" ${isAccepted ? 'disabled' : ''}>
-                            ${isAccepted ? 'Đã chấp nhận' : 'Chấp nhận giá'}
-                        </button>
-                    </div>
-                `;
-                leaderboardList.appendChild(card);
-            });
-        }
+            card.innerHTML = `
+                <div class="avatar">${person.name.charAt(0).toUpperCase()}</div>
+                <div class="info">
+                    <p class="name">${person.name}</p>
+                    <p class="item">Bán: <strong>${person.quantity.toLocaleString('vi-VN')} kg ${person.item}</strong></p>
+                    <p class="price">~ ${estimatedPrice} VNĐ</p>
+                </div>
+                <div class="location-pin" title="${person.location_name}">
+                    <i class="fa-solid fa-map-marker-alt"></i>
+                </div>
+            `;
+            tradingBoardList.appendChild(card);
 
-        leaderboardList.addEventListener('click', (e) => {
-            if (e.target.matches('.btn-accept')) {
-                const userEmail = e.target.dataset.email;
-                const targetCustomer = customers.find(c => c.email === userEmail);
-                if (targetCustomer) {
-                    targetCustomer.status = 'accepted';
-                    renderLeaderboard();
-                }
-            }
+            // B. TẠO MARKER TRÊN BẢN ĐỒ
+            const marker = L.marker([person.lat, person.lng]).addTo(markersLayer);
+            marker.bindPopup(`<b>${person.name}</b><br>${person.item} - ${person.quantity}kg`);
+            markers[person.id] = marker; // Lưu marker vào object với key là ID
         });
-
-        function animateUpdate() {
-            leaderboardList.classList.add('updating');
-            setTimeout(() => {
-                customers.sort(() => Math.random() - 0.5);
-                renderLeaderboard();
-                leaderboardList.classList.remove('updating');
-            }, 500);
-        }
-
-        renderLeaderboard();
-        setInterval(animateUpdate, 8000);
     }
 
-    // --- KHỞI CHẠY TẤT CẢ CÁC MODULE ---
-    initializeTabSwitching();
-    initializeLocationFinder();
-    initializeCustomerLeaderboard();
+    // 3. GẮN SỰ KIỆN TƯƠNG TÁC
+    tradingBoardList.addEventListener('mouseover', (e) => {
+        const card = e.target.closest('.trading-card');
+        if (!card) return;
+
+        const id = card.dataset.id;
+        const marker = markers[id];
+        if (marker) {
+            card.classList.add('highlight');
+            marker.openPopup();
+        }
+    });
+
+    tradingBoardList.addEventListener('mouseout', (e) => {
+        const card = e.target.closest('.trading-card');
+        if (!card) return;
+
+        const id = card.dataset.id;
+        const marker = markers[id];
+        if (marker) {
+            card.classList.remove('highlight');
+            marker.closePopup();
+        }
+    });
+
+    // --- KHỞI CHẠY ---
+    renderTradingBoard();
 });
