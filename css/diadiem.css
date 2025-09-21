@@ -227,4 +227,20 @@
         align-items: stretch;
     }
 }
+.info .phone {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+}
+
+.info .phone i {
+    margin-right: 6px;
+    color: var(--primary-color); /* Sử dụng màu chủ đạo cho icon */
+}
+
+.info .price {
+    margin-top: 8px; /* Tăng khoảng cách cho giá tiền */
+}
 
