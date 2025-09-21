@@ -152,7 +152,7 @@
     background-color: var(--white);
     border-radius: 8px;
     border: 1px solid #eef0f2;
-    align-items: center;
+    align-items: flex-start; /* Đổi thành flex-start */
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -173,6 +173,7 @@
     font-weight: 700;
     font-size: 1.4rem;
     flex-shrink: 0;
+    margin-top: 5px; /* Căn chỉnh avatar */
 }
 .info {
     flex-grow: 1;
@@ -186,19 +187,49 @@
     color: #555;
     margin: 4px 0 0 0;
 }
-.info .price {
+.info .phone {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+}
+.info .phone i {
+    margin-right: 6px;
+    color: var(--primary-color);
+}
+
+/* Style cho khoảng cách (MỚI) */
+.info .distance {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #007bff; /* Màu xanh dương cho nổi bật */
+    margin: 4px 0 0 0;
+}
+.info .distance i {
+    margin-right: 6px;
+}
+
+/* Nhóm giá và pin vị trí lại (MỚI) */
+.price-location {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    flex-shrink: 0;
+}
+.price-location .price {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-top: 5px;
+    margin-bottom: 8px;
 }
 .location-pin {
     font-size: 1.5rem;
     color: var(--secondary-color);
-    cursor: help; /* Đổi con trỏ để cho biết có thể hover */
+    cursor: help;
     padding: 5px;
 }
-
 /* Responsive */
 @media (max-width: 992px) {
     .map-results-wrapper {
@@ -227,20 +258,3 @@
         align-items: stretch;
     }
 }
-.info .phone {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 4px 0;
-    display: flex;
-    align-items: center;
-}
-
-.info .phone i {
-    margin-right: 6px;
-    color: var(--primary-color); /* Sử dụng màu chủ đạo cho icon */
-}
-
-.info .price {
-    margin-top: 8px; /* Tăng khoảng cách cho giá tiền */
-}
-
