@@ -5,25 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Về Chúng Tôi - ECOCYCLE</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css"> <!-- Thêm file CSS mới cho trang này -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <main style="padding: 60px 0;">
-        <div class="container" style="max-width: 800px; text-align: center;">
-            <h1 class="section-title" style="margin-bottom: 30px;"><span>VỀ ECOCYCLE</span></h1>
-            <h2>Sứ Mệnh Của Chúng Tôi</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8;">
-                Tại ECOCYCLE, chúng tôi tin rằng mọi thứ đều có giá trị, kể cả những thứ được coi là phế liệu. Sứ mệnh của chúng tôi là tạo ra một nền tảng kết nối minh bạch, hiệu quả và bền vững giữa người bán và người mua trong ngành công nghiệp tái chế. Chúng tôi nỗ lực để tối ưu hóa giá trị cho từng cá nhân, đồng thời góp phần xây dựng một môi trường xanh hơn cho Việt Nam.
-            </p>
-            <h2 style="margin-top: 40px;">Liên Hệ</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8;">
-                Mọi thắc mắc và hợp tác, xin vui lòng liên hệ qua:<br>
-                <strong>Email:</strong> phelieu2025@gmail.com<br>
-                <strong>Hotline:</strong> 0337628746
-            </p>
+
+    <main class="about-page-main">
+        <div class="container">
+            <!-- SỨ MỆNH -->
+            <section class="about-section text-center">
+                <h1 class="section-title"><span>VỀ ECOCYCLE</span></h1>
+                <h2>Sứ Mệnh Của Chúng Tôi</h2>
+                <p class="mission-text">
+                    Tại ECOCYCLE, chúng tôi tin rằng mọi thứ đều có giá trị, kể cả những thứ được coi là phế liệu. Sứ mệnh của chúng tôi là tạo ra một nền tảng kết nối minh bạch, hiệu quả và bền vững giữa người bán và người mua trong ngành công nghiệp tái chế. Chúng tôi nỗ lực để tối ưu hóa giá trị cho từng cá nhân, đồng thời góp phần xây dựng một môi trường xanh hơn cho Việt Nam.
+                </p>
+            </section>
+
+            <!-- ĐỘI NGŨ DỰ ÁN (Mục mới) -->
+            <section class="about-section project-team">
+                <h2 class="text-center">Đội Ngũ Dự Án</h2>
+                <div class="team-layout">
+                    <!-- Mentor -->
+                    <div class="team-tier">
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-mentor">
+                                <img src="https://via.placeholder.com/200" alt="Ảnh Mentor">
+                            </div>
+                            <p class="member-name">Thầy ABC</p>
+                            <p class="member-role">Mentor Hướng Dẫn</p>
+                        </div>
+                    </div>
+                    <!-- Leader -->
+                    <div class="team-tier">
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-leader">
+                                <img src="https://via.placeholder.com/150" alt="Ảnh Leader">
+                            </div>
+                            <p class="member-name">Nguyễn Văn A</p>
+                            <p class="member-role">Project Leader</p>
+                        </div>
+                    </div>
+                    <!-- Members -->
+                    <div class="team-tier team-members-grid">
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-member">
+                                <img src="https://via.placeholder.com/120" alt="Ảnh Thành viên 1">
+                            </div>
+                            <p class="member-name">Trần Thị B</p>
+                            <p class="member-role">Thành viên</p>
+                        </div>
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-member">
+                                <img src="https://via.placeholder.com/120" alt="Ảnh Thành viên 2">
+                            </div>
+                            <p class="member-name">Lê Văn C</p>
+                            <p class="member-role">Thành viên</p>
+                        </div>
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-member">
+                                <img src="https://via.placeholder.com/120" alt="Ảnh Thành viên 3">
+                            </div>
+                            <p class="member-name">Phạm Thị D</p>
+                            <p class="member-role">Thành viên</p>
+                        </div>
+                        <div class="team-member-card">
+                            <div class="member-avatar avatar-member">
+                                <img src="https://via.placeholder.com/120" alt="Ảnh Thành viên 4">
+                            </div>
+                            <p class="member-name">Hoàng Văn E</p>
+                            <p class="member-role">Thành viên</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LIÊN HỆ -->
+            <section class="about-section text-center">
+                <h2>Liên Hệ</h2>
+                <p class="contact-text">
+                    Mọi thắc mắc và hợp tác, xin vui lòng liên hệ qua:<br>
+                    <strong>Email:</strong> phelieu2025@gmail.com<br>
+                    <strong>Hotline:</strong> 0337628746
+                </p>
+            </section>
         </div>
     </main>
+
     <div id="footer-placeholder"></div>
     <script src="js/templates.js"></script>
     <script src="js/script.js"></script>
