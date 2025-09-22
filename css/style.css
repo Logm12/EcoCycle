@@ -694,3 +694,110 @@ section {
 #logout-link {
     color: #dc3545 !important; 
 }
+@media (max-width: 768px) {
+
+    /* --- CHUNG --- */
+    section {
+        padding: 40px 0; /* Giảm khoảng cách các section trên mobile */
+    }
+
+    .section-title {
+        font-size: 1.8rem; /* Giảm cỡ chữ tiêu đề section */
+    }
+
+    /* --- HEADER (Dự phòng cho responsive header) --- */
+    .main-nav .container ul {
+        /* Trên mobile, menu chính sẽ được ẩn đi và thay bằng nút hamburger */
+        /* Logic JS sẽ xử lý việc hiện/ẩn menu này */
+        display: none; 
+    }
+    
+    .search-bar {
+        display: none; /* Ẩn thanh tìm kiếm chính trên mobile cho gọn */
+    }
+
+    .user-actions {
+        gap: 10px;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+        height: 400px; /* Giảm chiều cao banner */
+        background: url('/images/banner.png') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem; /* Giảm cỡ chữ tiêu đề banner */
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* --- CATEGORIES SECTION --- */
+    .categories .container {
+        flex-wrap: wrap; /* Cho phép các item tự động xuống dòng */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .category-item {
+        flex-basis: calc(33.33% - 15px); /* Hiển thị 3 item trên một hàng */
+    }
+
+    .category-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* --- SERVICES SECTION --- */
+    .service-cards {
+        flex-direction: column; /* Chuyển 2 card dịch vụ thành cột dọc */
+        gap: 20px;
+    }
+
+    /* --- POSTS SECTION --- */
+    .post-header {
+        flex-direction: column; /* Chuyển header của post thành cột dọc */
+        align-items: flex-start; /* Căn lề trái */
+        text-align: left;
+        gap: 20px;
+    }
+
+    .post-header .section-title {
+        text-align: left;
+    }
+    
+    .post-header .section-title span::after {
+        margin-left: 0; /* Căn lề trái cho gạch chân */
+    }
+
+    .post-grid {
+        grid-template-columns: 1fr; /* Chuyển lưới bài viết thành 1 cột */
+    }
+    
+    /* --- LATEST POSTS SECTION --- */
+    #posts-grid.product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Cho phép lưới tự điều chỉnh */
+    }
+}
+
+
+/* Tối ưu thêm cho màn hình điện thoại nhỏ hơn */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .category-item {
+        flex-basis: calc(50% - 10px); /* Hiển thị 2 item trên một hàng */
+        gap: 10px;
+    }
+
+    .user-actions .cart-link {
+        display: none; /* Ẩn bớt link giỏ hàng cho gọn */
+    }
+}
