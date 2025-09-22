@@ -1,0 +1,123 @@
+/* CSS cho trang Về Chúng Tôi */
+
+.about-page-main .container {
+    max-width: 900px; /* Tăng chiều rộng container một chút */
+    margin: 0 auto;
+}
+
+.about-section {
+    padding: 40px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.about-section:last-child {
+    border-bottom: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.about-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.mission-text, .contact-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- ĐỘI NGŨ DỰ ÁN --- */
+.project-team {
+    padding-bottom: 60px;
+}
+
+.team-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Khoảng cách giữa các cấp: mentor, leader, members */
+}
+
+.team-tier {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.team-member-card {
+    text-align: center;
+}
+
+.member-avatar {
+    border-radius: 50%;
+    overflow: hidden; /* Đảm bảo ảnh nằm gọn trong hình tròn */
+    margin: 0 auto 15px;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-avatar:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cắt ảnh vừa vặn, không bị méo */
+    display: block;
+}
+
+/* Kích thước cho từng vai trò */
+.avatar-mentor { width: 200px; height: 200px; }
+.avatar-leader { width: 150px; height: 150px; }
+.avatar-member { width: 120px; height: 120px; }
+
+.member-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.member-role {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* Lưới cho các thành viên */
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột */
+    gap: 30px; /* Khoảng cách giữa các thành viên */
+    width: 100%;
+}
+
+/* --- RESPONSIVE CHO THIẾT BỊ DI ĐỘNG --- */
+@media (max-width: 768px) {
+    .about-section h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Thay đổi kích thước avatar cho nhỏ hơn */
+    .avatar-mentor { width: 160px; height: 160px; }
+    .avatar-leader { width: 130px; height: 130px; }
+    .avatar-member { width: 100px; height: 100px; }
+
+    /* Chuyển lưới thành viên thành 2 cột */
+    .team-members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar-mentor { width: 140px; height: 140px; }
+    .avatar-leader { width: 110px; height: 110px; }
+    .avatar-member { width: 90px; height: 90px; }
+}
