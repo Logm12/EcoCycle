@@ -64,17 +64,27 @@ main {
     padding: 12px 25px;
 }
 
-/* --- BẢNG GIÁ --- */
+/* ======================================================== */
+/* ========== BẢNG GIÁ (SỬA LẠI ĐỂ RESPONSIVE) ========== */
+/* ======================================================== */
 .price-table-container {
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    overflow: hidden; /* Để bo góc hoạt động với table */
+    
+    /* SỬA LẠI: Cho phép cuộn ngang khi cần thiết */
+    overflow-x: auto; 
+    
+    /* Thêm thuộc tính để cuộn mượt hơn trên iOS */
+    -webkit-overflow-scrolling: touch; 
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    
+    /* SỬA LẠI: Đặt chiều rộng tối thiểu để bảng không bị co dúm */
+    min-width: 600px; 
 }
 
 thead tr {
@@ -86,6 +96,9 @@ th, td {
     padding: 15px 20px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    
+    /* SỬA LẠI: Ngăn không cho chữ bị xuống dòng đột ngột */
+    white-space: nowrap; 
 }
 
 th {
@@ -113,6 +126,8 @@ td:first-child {
     align-items: center;
     margin-top: 30px;
     padding: 0 10px;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    gap: 15px;
 }
 
 #pagination-summary {
@@ -142,7 +157,27 @@ td:first-child {
     border-color: var(--primary-color);
 }
 
-#pagination-controls button.disabled {
+#pagination-controls button:disabled,
+#pagination-controls button[disabled] { /* Thêm selector để chắc chắn */
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+/* ======================================================== */
+/* ========== MEDIA QUERY CHO GIAO DIỆN DI ĐỘNG ========== */
+/* ======================================================== */
+@media (max-width: 768px) {
+    .pricelist-header h1 {
+        font-size: 2rem; /* Giảm cỡ chữ tiêu đề */
+    }
+
+    .price-filters {
+        flex-direction: column; /* Xếp chồng bộ lọc theo chiều dọc */
+        align-items: stretch; /* Kéo dài các phần tử cho bằng nhau */
+    }
+
+    .pagination-container {
+        flex-direction: column; /* Xếp chồng phần phân trang */
+        justify-content: center;
+    }
 }
