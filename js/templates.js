@@ -1,4 +1,4 @@
-// js/templates.js (PHIÊN BẢN CUỐI CÙNG)
+// js/templates.js (PHIÊN BẢN SỬA LỖI CUỐI CÙNG)
 
 async function fetchHtmlAsText(filePath) {
     const response = await fetch(filePath);
@@ -11,23 +11,21 @@ async function loadCommonComponents() {
         const userRole = localStorage.getItem('userRole');
         const currentPage = window.location.pathname;
 
-        // Danh sách các trang thuộc về "không gian làm việc" của người bán
         const vendorPages = [
             '/dashboard.html',
             '/my-posts.html',
             '/calculator.html',
-            '/pricelist.html', // <-- THÊM VÀO
-            '/diadiem.html'    // <-- THÊM VÀO
+            '/pricelist.html',
+
+            '/diadiem.html'
         ];
 
         let headerPath, footerPath;
 
-        // KIỂM TRA: Nếu người dùng là vendor VÀ đang ở trên một trong các trang của vendor
         if (userRole === 'vendor' && vendorPages.some(page => currentPage.includes(page))) {
             headerPath = 'templates/vendor-header.html';
             footerPath = 'templates/vendor-footer.html';
         } else {
-            // Trong mọi trường hợp khác (khách, khách hàng, hoặc vendor xem trang chủ)
             headerPath = 'templates/header.html';
             footerPath = 'templates/footer.html';
         }
@@ -43,10 +41,28 @@ async function loadCommonComponents() {
         if (headerPlaceholder) headerPlaceholder.innerHTML = headerHtml;
         if (footerPlaceholder) footerPlaceholder.innerHTML = footerHtml;
 
+        // =================================================================
+        // SỬA LẠI: Gọi tất cả các hàm phụ thuộc vào header TẠI ĐÂY
+        // =================================================================
+        
+        // 1. Đánh dấu link active trên thanh điều hướng
         setActiveNavLink();
+
+        // 2. Cập nhật trạng thái đăng nhập/đăng xuất
         if (typeof updateAuthState === 'function') {
             updateAuthState();
         }
+
+        // 3. KHỞI TẠO NÚT HAMBURGER (QUAN TRỌNG NHẤT)
+        if (typeof initializeMobileNav === 'function') {
+            initializeMobileNav();
+        }
+
+        // 4. Khởi tạo thanh tìm kiếm chung
+        if (typeof initializeGlobalSearch === 'function') {
+            initializeGlobalSearch();
+        }
+        // =================================================================
 
     } catch (error) {
         console.error('Lỗi khi tải các thành phần chung:', error);
@@ -54,16 +70,21 @@ async function loadCommonComponents() {
 }
 
 function setActiveNavLink() {
-    const currentPath = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.main-nav a');
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        if (linkPage === currentPath && link.getAttribute('href') !== '#') {
-            link.classList.add('active');
-        } else {
+    // Đợi một chút để đảm bảo DOM đã cập nhật hoàn toàn
+    setTimeout(() => {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html'; // Mặc định là index.html nếu rỗng
+        const navLinks = document.querySelectorAll('.main-nav a, .mobile-nav a');
+        
+        navLinks.forEach(link => {
             link.classList.remove('active');
-        }
-    });
+            const linkPath = link.getAttribute('href').split('/').pop();
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    }, 100); // Đợi 100ms
 }
 
+
+// Sửa lại: Chạy hàm chính khi DOM đã sẵn sàng
 document.addEventListener('DOMContentLoaded', loadCommonComponents);
