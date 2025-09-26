@@ -93,7 +93,6 @@ function handleAccountPage() {
     const signUpFields = document.getElementById('signUpFields');
     const submitBtn = document.getElementById('submitBtn');
 
-    // --- MÔ PHỎNG CƠ SỞ DỮ LIỆU NGƯỜI DÙNG ---
     const getUsers = () => JSON.parse(localStorage.getItem('ecoUsers')) || [];
     const saveUsers = (users) => localStorage.setItem('ecoUsers', JSON.stringify(users));
 
@@ -121,8 +120,10 @@ function handleAccountPage() {
         }
     }
 
-    signInBtn.addEventListener('click', () => setMode(false));
-    signUpBtn.addEventListener('click', () => setMode(true));
+    if (signInBtn && signUpBtn) {
+        signInBtn.addEventListener('click', () => setMode(false));
+        signUpBtn.addEventListener('click', () => setMode(true));
+    }
 
     authForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -229,71 +230,76 @@ function displayTopProducts() {
         return Math.max(...parts);
     };
 
-    const sortedData = [...priceData].sort((a, b) => getMaxValue(b.price) - getMaxValue(a.price));
-    const topProducts = sortedData.slice(0, 10);
+    // Giả sử priceData tồn tại (từ data.js)
+    if (typeof priceData !== 'undefined') {
+        const sortedData = [...priceData].sort((a, b) => getMaxValue(b.price) - getMaxValue(a.price));
+        const topProducts = sortedData.slice(0, 10);
 
-    sliderWrapper.innerHTML = '';
-    topProducts.forEach(product => {
-        const slideHTML = `
-            <div class="swiper-slide">
-                <div class="product-card">
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p>${product.price} đ/kg</p>
+        sliderWrapper.innerHTML = '';
+        topProducts.forEach(product => {
+            const slideHTML = `
+                <div class="swiper-slide">
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <p>${product.price} đ/kg</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-        sliderWrapper.innerHTML += slideHTML;
-    });
+            `;
+            sliderWrapper.innerHTML += slideHTML;
+        });
 
-    const swiper = new Swiper('#top-products-slider', {
-        loop: true,
-        spaceBetween: 30,
-        breakpoints: {
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 30 }
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+        new Swiper('#top-products-slider', {
+            loop: true,
+            spaceBetween: 30,
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }
 }
 
 /**
  * ===================================================================
- * HÀM KHỞI TẠO TÌM KIẾM CHUNG
- * ===================================================================
- */
-/**
- * ===================================================================
- * HÀM KHỞI TẠO MENU TRÊN DI ĐỘNG
+ * HÀM KHỞI TẠO MENU TRÊN DI ĐỘNG (SỬA LẠI)
  * Sẽ được gọi bởi templates.js
  * ===================================================================
  */
 function initializeMobileNav() {
+    // Gắn sự kiện cho nút MỞ menu (nút này nằm trong header)
     const toggleButton = document.querySelector('.mobile-nav-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-    
-    // Kiểm tra lại một lần nữa để chắc chắn
-    if (!toggleButton || !mobileNav) {
-        console.error("Không tìm thấy các thành phần của menu di động!");
-        return;
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.add('mobile-nav-active');
+        });
+    } else {
+        console.error("Lỗi: Không tìm thấy nút hamburger (.mobile-nav-toggle).");
     }
 
-    const closeButton = mobileNav.querySelector('.mobile-nav-close');
-    const overlay = document.querySelector('.mobile-nav-overlay');
+    // SỬA LẠI: Dùng Event Delegation để gắn sự kiện cho nút ĐÓNG menu
+    const closeNav = () => {
+        document.body.classList.remove('mobile-nav-active');
+    };
 
-    const openNav = () => document.body.classList.add('mobile-nav-active');
-    const closeNav = () => document.body.classList.remove('mobile-nav-active');
+    // Gắn một sự kiện duy nhất lên toàn bộ document
+    document.addEventListener('click', function(event) {
+        // 1. Nếu người dùng bấm vào phần tử có class .mobile-nav-close (nút X)
+        if (event.target.closest('.mobile-nav-close')) {
+            closeNav();
+        }
 
-    toggleButton.addEventListener('click', openNav);
-    
-    if (closeButton) closeButton.addEventListener('click', closeNav);
-    if (overlay) overlay.addEventListener('click', closeNav);
+        // 2. Nếu người dùng bấm vào lớp phủ màu đen bên ngoài
+        if (event.target.matches('.mobile-nav-overlay')) {
+            closeNav();
+        }
+    });
 }
-
 
 /**
  * ===================================================================
@@ -308,22 +314,22 @@ function initializeGlobalSearch() {
     const searchInput = searchBar.querySelector('input');
     const searchButton = searchBar.querySelector('button');
 
-        const handleSearch = () => {
-            const query = searchInput.value.trim().toLowerCase();
-            if (!query) return;
+    const handleSearch = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) return;
 
-            if (query.includes('giá') || query.includes('sắt') || query.includes('đồng') || query.includes('nhôm')) {
-                window.location.href = 'pricelist.html';
-            } else if (query.includes('bản đồ') || query.includes('địa điểm') || query.includes('gần đây')) {
-                window.location.href = 'diadiem.html';
-            } else if (query.includes('đăng') || query.includes('bán')) {
-                window.location.href = 'post-ad.html';
-            } else if (query.includes('về') || query.includes('giới thiệu') || query.includes('liên hệ')) {
-                window.location.href = 'about.html';
-            } else {
-                alert(`Không tìm thấy kết quả phù hợp cho từ khóa: "${searchInput.value}"`);
-            }
-        };
+        if (query.includes('giá') || query.includes('sắt') || query.includes('đồng') || query.includes('nhôm')) {
+            window.location.href = 'pricelist.html';
+        } else if (query.includes('bản đồ') || query.includes('địa điểm') || query.includes('gần đây')) {
+            window.location.href = 'diadiem.html';
+        } else if (query.includes('đăng') || query.includes('bán')) {
+            window.location.href = 'post-ad.html';
+        } else if (query.includes('về') || query.includes('giới thiệu') || query.includes('liên hệ')) {
+            window.location.href = 'about.html';
+        } else {
+            alert(`Không tìm thấy kết quả phù hợp cho từ khóa: "${searchInput.value}"`);
+        }
+    };
 
     searchButton.addEventListener('click', handleSearch);
     searchInput.addEventListener('keydown', (e) => {
@@ -331,43 +337,13 @@ function initializeGlobalSearch() {
     });
 }
 
-
-/**
- * ===================================================================
- * HÀM KHỞI TẠO MENU TRÊN DI ĐỘNG
- * Sẽ được gọi bởi templates.js
- * ===================================================================
- */
-function initializeMobileNav() {
-    const toggleButton = document.querySelector('.mobile-nav-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-    
-    // Kiểm tra lại một lần nữa để chắc chắn
-    if (!toggleButton || !mobileNav) {
-        console.error("Không tìm thấy các thành phần của menu di động!");
-        return;
-    }
-
-    const closeButton = mobileNav.querySelector('.mobile-nav-close');
-    const overlay = document.querySelector('.mobile-nav-overlay');
-
-    const openNav = () => document.body.classList.add('mobile-nav-active');
-    const closeNav = () => document.body.classList.remove('mobile-nav-active');
-
-    toggleButton.addEventListener('click', openNav);
-    
-    if (closeButton) closeButton.addEventListener('click', closeNav);
-    if (overlay) overlay.addEventListener('click', closeNav);
-}
-
-
 /**
  * ===================================================================
  * BỘ ĐIỀU KHIỂN CHÍNH - CHẠY KHI TÀI LIỆU SẴN SÀNG
  * ===================================================================
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Các hàm này có thể chạy ngay vì chúng không cần header
+    // Các hàm này có thể chạy ngay vì chúng không cần header được tải
     handleAccountPage();
     loadUserPosts();
 	displayTopProducts();
