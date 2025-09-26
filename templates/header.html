@@ -1,59 +1,58 @@
-<!-- templates/header.html (PHIÊN BẢN HOÀN CHỈNH) -->
 <header id="main-header">
-    <!-- Thanh thông tin liên hệ ở trên cùng -->
-    <div class="header-top">
-        <div class="container">
-            <span><i class="fa-solid fa-phone"></i> 0337628746</span>
-            <span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
-        </div>
-    </div>
+<!-- Thanh thông tin trên cùng -->
+<div class="header-top">
+<div class="container">
+<span><i class="fa-solid fa-phone"></i> 0337628746</span>
+<span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
+</div>
+</div>
+<!-- Header chính -->
+<div class="header-main">
+    <div class="container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <img src="images/Logo ECO web.png" alt="EcoCycle Logo" style="height: 50px;">
+        </a>
 
-    <!-- Phần header chính -->
-    <div class="header-main">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/Logo ECO web.png" alt="ECOCYCLE Logo">
-            </a>
-
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm kiếm phế liệu...">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-
-            <div class="user-actions">
-    <a href="post-ad.html" class="btn btn-post">
-        <i class="fa-solid fa-plus"></i> Đăng bán
-    </a>
-                <a href="#" class="cart-link">
-                    <i class="fa-solid fa-shopping-cart"></i> 0 ₫
-                </a>
-                <div id="auth-status">
-                    <!-- JavaScript sẽ điền vào đây -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Thanh điều hướng chính -->
-    <nav class="main-nav">
-        <div class="container">
+        <!-- Thanh điều hướng cho Desktop -->
+        <nav class="main-nav">
             <ul>
-                <li><a href="index.html"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
-                <li><a href="diadiem.html"><i class="fa-solid fa-map-marker-alt"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
-                <li><a href="pricelist.html"><i class="fa-solid fa-tags"></i> BẢNG GIÁ</a></li>
-                <li class="dropdown">
-                    <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">CHAI NHỰA</a></li>
-                        <li><a href="#">SẮT VỤN</a></li>
-                        <li><a href="#">ĐỒNG</a></li>
-                        <li><a href="#">DÂY ĐIỆN</a></li>
-                        <li><a href="#">PIN</a></li>
-                        <li><a href="#">QUẦN ÁO</a></li>
-                    </ul>
-                </li>
-<li><a href="about.html"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
+                <li><a href="index.html" class="active">Trang Chủ</a></li>
+                <li><a href="pricelist.html">Bảng Giá</a></li>
+                <li><a href="diadiem.html">Địa Điểm</a></li>
+                <li><a href="about.html">Về Chúng Tôi</a></li>
             </ul>
+        </nav>
+
+        <!-- Các nút hành động -->
+        <div class="header-actions">
+            <a href="post-ad.html" class="btn btn-post"><i class="fa-solid fa-plus"></i> Đăng bán</a>
+            <div id="auth-status">
+                <a href="Account.html">Đăng nhập</a>
+            </div>
         </div>
-    </nav>
+
+        <!-- Nút Hamburger cho Mobile -->
+        <button id="mobile-nav-toggle" class="mobile-nav-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+</div>
 </header>
+<!-- Menu cho Mobile (ẩn mặc định) -->
+<div id="mobile-nav" class="mobile-nav">
+<div class="mobile-nav-header">
+<img src="images/Logo ECO web.png" alt="Logo" class="mobile-nav-logo">
+<button id="mobile-nav-close" class="mobile-nav-close">&times;</button>
+</div>
+<ul>
+<li><a href="index.html">Trang Chủ</a></li>
+<li><a href="pricelist.html">Bảng Giá</a></li>
+<li><a href="diadiem.html">Địa Điểm</a></li>
+<li><a href="about.html">Về Chúng Tôi</a></li>
+<li class="divider"></li>
+<li><a href="post-ad.html" class="btn btn-post">Đăng bán</a></li>
+<li><a href="Account.html">Tài khoản của tôi</a></li>
+</ul>
+</div>
+<div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
