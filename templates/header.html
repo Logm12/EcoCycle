@@ -1,37 +1,68 @@
+<!-- ==================== HEADER ==================== -->
 <header id="main-header">
-    <div class="container">
-        <!-- Logo -->
-        <a href="index.html" class="logo">
-            <img src="images/Logo ECO web.png" alt="EcoCycle Logo">
-        </a>
+    <!-- PART 1: TOP BAR -->
+    <div class="header-top">
+        <div class="container">
+            <span><i class="fa-solid fa-phone"></i> 0337628746</span>
+            <span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
+        </div>
+    </div>
 
-        <!-- Thanh điều hướng cho Desktop -->
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
-                <li><a href="diadiem.html"><i class="fa-solid fa-map-location-dot"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
-                <li><a href="pricelist.html"><i class="fa-solid fa-tags"></i> BẢNG GIÁ</a></li>
-                <li class="dropdown">
-                    <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down dropdown-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Phế liệu kim loại</a></li>
-                        <li><a href="#">Phế liệu giấy</a></li>
-                        <li><a href="#">Phế liệu nhựa</a></li>
-                        <li><a href="#">Phế liệu điện tử</a></li>
-                    </ul>
-                </li>
-                <li><a href="about.html"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
-            </ul>
-        </nav>
+    <!-- PART 2: MAIN BAR -->
+    <div class="header-main">
+        <div class="container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/Logo ECO web.png" alt="EcoCycle Logo">
+            </a>
 
-        <!-- Nút Hamburger cho Mobile -->
-        <button id="mobile-nav-toggle" class="mobile-nav-toggle">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm phế liệu...">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <!-- User Actions -->
+            <div class="user-actions">
+                <a href="post-ad.html" class="btn btn-post"><i class="fa-solid fa-plus"></i> Đăng bán</a>
+                <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> 0 đ</a>
+                <div id="auth-status">
+                    <a href="Account.html">Đăng nhập / Đăng ký</a>
+                </div>
+            </div>
+            
+            <!-- Nút Hamburger cho Mobile -->
+            <button id="mobile-nav-toggle" class="mobile-nav-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- PART 3: NAVIGATION BAR -->
+    <div class="header-nav">
+        <div class="container">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
+                    <li><a href="diadiem.html"><i class="fa-solid fa-map-location-dot"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
+                    <li><a href="pricelist.html"><i class="fa-solid fa-tags"></i> BẢNG GIÁ</a></li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Phế liệu kim loại</a></li>
+                            <li><a href="#">Phế liệu giấy</a></li>
+                            <li><a href="#">Phế liệu nhựa</a></li>
+                            <li><a href="#">Phế liệu điện tử</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>
 
-<!-- Menu cho Mobile (ẩn mặc định) -->
+<!-- ==================== MOBILE MENU ==================== -->
 <div id="mobile-nav" class="mobile-nav">
     <div class="mobile-nav-header">
         <span class="mobile-nav-title">MENU</span>
