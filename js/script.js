@@ -6,8 +6,6 @@
  * Được gọi bởi templates.js sau khi header được tải.
  * ===================================================================
  */
-// js/script.js (Hàm updateAuthState hoàn chỉnh)
-
 function updateAuthState() {
     const authStatusDiv = document.getElementById('auth-status');
     if (!authStatusDiv) return;
@@ -96,7 +94,6 @@ function handleAccountPage() {
     const submitBtn = document.getElementById('submitBtn');
 
     // --- MÔ PHỎNG CƠ SỞ DỮ LIỆU NGƯỜI DÙNG ---
-    // Lấy danh sách người dùng từ localStorage, nếu không có thì tạo mảng rỗng
     const getUsers = () => JSON.parse(localStorage.getItem('ecoUsers')) || [];
     const saveUsers = (users) => localStorage.setItem('ecoUsers', JSON.stringify(users));
 
@@ -133,54 +130,48 @@ function handleAccountPage() {
         const password = document.getElementById('password').value;
         const users = getUsers();
 
-    if (isSignUp) {
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim(); 
-        const role = document.querySelector('input[name="role"]:checked').value;
+        if (isSignUp) {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim(); 
+            const role = document.querySelector('input[name="role"]:checked').value;
 
-        // Kiểm tra email đã tồn tại chưa
-        const existingUser = users.find(user => user.email === email);
-        if (existingUser) {
-            alert('Email này đã được sử dụng. Vui lòng chọn email khác.');
-            return;
-        }
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                alert('Email này đã được sử dụng. Vui lòng chọn email khác.');
+                return;
+            }
 
-        // Thêm người dùng mới vào "cơ sở dữ liệu"
-        const newUser = { email, password, name, phone, role }; 
-        users.push(newUser);
-        saveUsers(users);
+            const newUser = { email, password, name, phone, role }; 
+            users.push(newUser);
+            saveUsers(users);
 
-        alert(`Đăng ký thành công với vai trò "${role === 'vendor' ? 'Người bán' : 'Khách hàng'}"!\nVui lòng đăng nhập để tiếp tục.`);
-        setMode(false);
-        authForm.reset();
-        document.getElementById('email').value = email;
-        document.getElementById('password').focus();
+            alert(`Đăng ký thành công với vai trò "${role === 'vendor' ? 'Người bán' : 'Khách hàng'}"!\nVui lòng đăng nhập để tiếp tục.`);
+            setMode(false);
+            authForm.reset();
+            document.getElementById('email').value = email;
+            document.getElementById('password').focus();
 
-    } else {
-        // --- LOGIC ĐĂNG NHẬP MỚI ---
-        const foundUser = users.find(user => user.email === email);
-
-        if (!foundUser || foundUser.password !== password) {
-            alert('Email hoặc mật khẩu không chính xác.');
-            return;
-        }
-
-        // Đăng nhập thành công, lưu thông tin phiên làm việc
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userName', foundUser.name);
-        localStorage.setItem('userRole', foundUser.role); // <-- LƯU ROLE
-
-        alert(`Đăng nhập thành công!`);
-
-        // PHÂN LUỒNG CHUYỂN HƯỚNG DỰA TRÊN ROLE
-        if (foundUser.role === 'vendor') {
-            window.location.href = 'dashboard.html'; // Chuyển đến trang dashboard
         } else {
-            window.location.href = 'index.html'; // Chuyển về trang chủ
-        }
-    }
-});
+            const foundUser = users.find(user => user.email === email);
 
+            if (!foundUser || foundUser.password !== password) {
+                alert('Email hoặc mật khẩu không chính xác.');
+                return;
+            }
+
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', foundUser.name);
+            localStorage.setItem('userRole', foundUser.role);
+
+            alert(`Đăng nhập thành công!`);
+
+            if (foundUser.role === 'vendor') {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+    });
 
     document.getElementById('googleBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Google đang được phát triển.'));
     document.getElementById('facebookBtn')?.addEventListener('click', () => alert('Chức năng đăng nhập với Facebook đang được phát triển.'));
@@ -193,25 +184,19 @@ function handleAccountPage() {
  */
 function loadUserPosts() {
     const postsGrid = document.getElementById('posts-grid');
-    if (!postsGrid) return; // Nếu không có grid, thoát hàm
+    if (!postsGrid) return;
 
     const userPosts = JSON.parse(localStorage.getItem('userPosts')) || [];
 
     if (userPosts.length === 0) {
-        // Bạn có thể giữ lại các sản phẩm mẫu hoặc hiển thị thông báo
-        // Ở đây tôi chọn hiển thị thông báo để thấy rõ kết quả
-        const featuredGrid = document.querySelector('.featured-products .product-grid');
-        if (featuredGrid) featuredGrid.style.display = 'none'; // Ẩn bảng giá mẫu nếu có tin đăng
-        
         postsGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Chưa có tin đăng nào. Hãy là người đầu tiên đăng tin!</p>';
         return;
     }
 
-    // Nếu có tin đăng, ẩn bảng giá mẫu đi để không bị trùng lặp
     const featuredSection = document.querySelector('.featured-products');
     if(featuredSection) featuredSection.style.display = 'none';
 
-    postsGrid.innerHTML = ''; // Xóa nội dung cũ
+    postsGrid.innerHTML = '';
     userPosts.forEach(post => {
         const postCard = document.createElement('div');
         postCard.className = 'product-card';
@@ -227,6 +212,11 @@ function loadUserPosts() {
     });
 }
 
+/**
+ * ===================================================================
+ * HÀM HIỂN THỊ SẢN PHẨM NỔI BẬT (TRÊN TRANG CHỦ)
+ * ===================================================================
+ */
 function displayTopProducts() {
     const sliderWrapper = document.querySelector('#top-products-slider .swiper-wrapper');
     if (!sliderWrapper) return; 
@@ -244,7 +234,6 @@ function displayTopProducts() {
 
     sliderWrapper.innerHTML = '';
     topProducts.forEach(product => {
-        
         const slideHTML = `
             <div class="swiper-slide">
                 <div class="product-card">
@@ -258,33 +247,25 @@ function displayTopProducts() {
         sliderWrapper.innerHTML += slideHTML;
     });
 
-    // Khởi tạo Swiper sau khi đã chèn HTML
     const swiper = new Swiper('#top-products-slider', {
-        // Các tùy chọn
-        loop: true, // Lặp lại vô tận
-        spaceBetween: 30, // Khoảng cách giữa các slide
-
-        // Responsive breakpoints
+        loop: true,
+        spaceBetween: 30,
         breakpoints: {
-            // Khi chiều rộng màn hình >= 640px
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20
-            },
-            // Khi chiều rộng màn hình >= 1024px
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 30
-            }
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 }
         },
-
-        // Nút điều hướng
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     });
 }
+
+/**
+ * ===================================================================
+ * HÀM KHỞI TẠO TÌM KIẾM CHUNG
+ * ===================================================================
+ */
 function initializeGlobalSearch() {
     setTimeout(() => {
         const searchBar = document.querySelector('.header-main .search-bar');
@@ -316,38 +297,36 @@ function initializeGlobalSearch() {
                 handleSearch();
             }
         });
-    }, 500); // Chờ 0.5s để đảm bảo header đã được render
+    }, 500);
 }
+
+/**
+ * ===================================================================
+ * BỘ ĐIỀU KHIỂN CHÍNH - CHẠY KHI TÀI LIỆU SẴN SÀNG
+ * ===================================================================
+ */
 document.addEventListener('DOMContentLoaded', function() {
+    // Khởi tạo các chức năng trên các trang tương ứng
     handleAccountPage();
     loadUserPosts();
 	displayTopProducts();
     initializeGlobalSearch();
 
-});
-// =============================================
-// ========== LOGIC FOR MOBILE NAVIGATION ==========
-// =============================================
-document.addEventListener('DOMContentLoaded', () => {
+    // --- LOGIC FOR MOBILE NAVIGATION (MỚI) ---
     const toggleButton = document.getElementById('mobile-nav-toggle');
     const closeButton = document.getElementById('mobile-nav-close');
     const overlay = document.getElementById('mobile-nav-overlay');
     const mobileNav = document.getElementById('mobile-nav');
 
-    if (toggleButton && mobileNav) {
-        // Mở menu
-        toggleButton.addEventListener('click', () => {
-            document.body.classList.add('mobile-nav-active');
-        });
+    if (toggleButton && mobileNav && closeButton && overlay) {
+        // Hàm mở menu
+        const openNav = () => document.body.classList.add('mobile-nav-active');
+        
+        // Hàm đóng menu
+        const closeNav = () => document.body.classList.remove('mobile-nav-active');
 
-        // Đóng menu bằng nút close
-        closeButton.addEventListener('click', () => {
-            document.body.classList.remove('mobile-nav-active');
-        });
-
-        // Đóng menu bằng cách bấm vào lớp phủ
-        overlay.addEventListener('click', () => {
-            document.body.classList.remove('mobile-nav-active');
-        });
+        toggleButton.addEventListener('click', openNav);
+        closeButton.addEventListener('click', closeNav);
+        overlay.addEventListener('click', closeNav);
     }
 });
