@@ -266,13 +266,47 @@ function displayTopProducts() {
  * HÀM KHỞI TẠO TÌM KIẾM CHUNG
  * ===================================================================
  */
-function initializeGlobalSearch() {
-    setTimeout(() => {
-        const searchBar = document.querySelector('.header-main .search-bar');
-        if (!searchBar) return;
+/**
+ * ===================================================================
+ * HÀM KHỞI TẠO MENU TRÊN DI ĐỘNG
+ * Sẽ được gọi bởi templates.js
+ * ===================================================================
+ */
+function initializeMobileNav() {
+    const toggleButton = document.querySelector('.mobile-nav-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    // Kiểm tra lại một lần nữa để chắc chắn
+    if (!toggleButton || !mobileNav) {
+        console.error("Không tìm thấy các thành phần của menu di động!");
+        return;
+    }
 
-        const searchInput = searchBar.querySelector('input');
-        const searchButton = searchBar.querySelector('button');
+    const closeButton = mobileNav.querySelector('.mobile-nav-close');
+    const overlay = document.querySelector('.mobile-nav-overlay');
+
+    const openNav = () => document.body.classList.add('mobile-nav-active');
+    const closeNav = () => document.body.classList.remove('mobile-nav-active');
+
+    toggleButton.addEventListener('click', openNav);
+    
+    if (closeButton) closeButton.addEventListener('click', closeNav);
+    if (overlay) overlay.addEventListener('click', closeNav);
+}
+
+
+/**
+ * ===================================================================
+ * HÀM KHỞI TẠO TÌM KIẾM CHUNG
+ * Sẽ được gọi bởi templates.js
+ * ===================================================================
+ */
+function initializeGlobalSearch() {
+    const searchBar = document.querySelector('.header-main .search-bar');
+    if (!searchBar) return;
+
+    const searchInput = searchBar.querySelector('input');
+    const searchButton = searchBar.querySelector('button');
 
         const handleSearch = () => {
             const query = searchInput.value.trim().toLowerCase();
@@ -291,14 +325,41 @@ function initializeGlobalSearch() {
             }
         };
 
-        searchButton.addEventListener('click', handleSearch);
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        });
-    }, 500);
+    searchButton.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleSearch();
+    });
 }
+
+
+/**
+ * ===================================================================
+ * HÀM KHỞI TẠO MENU TRÊN DI ĐỘNG
+ * Sẽ được gọi bởi templates.js
+ * ===================================================================
+ */
+function initializeMobileNav() {
+    const toggleButton = document.querySelector('.mobile-nav-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    // Kiểm tra lại một lần nữa để chắc chắn
+    if (!toggleButton || !mobileNav) {
+        console.error("Không tìm thấy các thành phần của menu di động!");
+        return;
+    }
+
+    const closeButton = mobileNav.querySelector('.mobile-nav-close');
+    const overlay = document.querySelector('.mobile-nav-overlay');
+
+    const openNav = () => document.body.classList.add('mobile-nav-active');
+    const closeNav = () => document.body.classList.remove('mobile-nav-active');
+
+    toggleButton.addEventListener('click', openNav);
+    
+    if (closeButton) closeButton.addEventListener('click', closeNav);
+    if (overlay) overlay.addEventListener('click', closeNav);
+}
+
 
 /**
  * ===================================================================
@@ -306,27 +367,8 @@ function initializeGlobalSearch() {
  * ===================================================================
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Khởi tạo các chức năng trên các trang tương ứng
+    // Các hàm này có thể chạy ngay vì chúng không cần header
     handleAccountPage();
     loadUserPosts();
 	displayTopProducts();
-    initializeGlobalSearch();
-
-    // --- LOGIC FOR MOBILE NAVIGATION (MỚI) ---
-    const toggleButton = document.getElementById('mobile-nav-toggle');
-    const closeButton = document.getElementById('mobile-nav-close');
-    const overlay = document.getElementById('mobile-nav-overlay');
-    const mobileNav = document.getElementById('mobile-nav');
-
-    if (toggleButton && mobileNav && closeButton && overlay) {
-        // Hàm mở menu
-        const openNav = () => document.body.classList.add('mobile-nav-active');
-        
-        // Hàm đóng menu
-        const closeNav = () => document.body.classList.remove('mobile-nav-active');
-
-        toggleButton.addEventListener('click', openNav);
-        closeButton.addEventListener('click', closeNav);
-        overlay.addEventListener('click', closeNav);
-    }
 });
