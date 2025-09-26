@@ -1,58 +1,51 @@
 <header id="main-header">
-<!-- Thanh thông tin trên cùng -->
-<div class="header-top">
-<div class="container">
-<span><i class="fa-solid fa-phone"></i> 0337628746</span>
-<span><i class="fa-solid fa-envelope"></i> phelieu2025@gmail.com</span>
-</div>
-</div>
-<!-- Header chính -->
-<div class="header-main">
     <div class="container">
         <!-- Logo -->
         <a href="index.html" class="logo">
-            <img src="images/Logo ECO web.png" alt="EcoCycle Logo" style="height: 50px;">
+            <img src="images/Logo ECO web.png" alt="EcoCycle Logo">
         </a>
 
         <!-- Thanh điều hướng cho Desktop -->
         <nav class="main-nav">
             <ul>
-                <li><a href="index.html" class="active">Trang Chủ</a></li>
-                <li><a href="pricelist.html">Bảng Giá</a></li>
-                <li><a href="diadiem.html">Địa Điểm</a></li>
-                <li><a href="about.html">Về Chúng Tôi</a></li>
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> TRANG CHỦ</a></li>
+                <li><a href="diadiem.html"><i class="fa-solid fa-map-location-dot"></i> ĐIỂM BÁN GẦN ĐÂY</a></li>
+                <li><a href="pricelist.html"><i class="fa-solid fa-tags"></i> BẢNG GIÁ</a></li>
+                <li class="dropdown">
+                    <a href="#"><i class="fa-solid fa-list"></i> DANH MỤC <i class="fa-solid fa-caret-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Phế liệu kim loại</a></li>
+                        <li><a href="#">Phế liệu giấy</a></li>
+                        <li><a href="#">Phế liệu nhựa</a></li>
+                        <li><a href="#">Phế liệu điện tử</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html"><i class="fa-solid fa-leaf"></i> VỀ ECOCYCLE</a></li>
             </ul>
         </nav>
-
-        <!-- Các nút hành động -->
-        <div class="header-actions">
-            <a href="post-ad.html" class="btn btn-post"><i class="fa-solid fa-plus"></i> Đăng bán</a>
-            <div id="auth-status">
-                <a href="Account.html">Đăng nhập</a>
-            </div>
-        </div>
 
         <!-- Nút Hamburger cho Mobile -->
         <button id="mobile-nav-toggle" class="mobile-nav-toggle">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-</div>
 </header>
+
 <!-- Menu cho Mobile (ẩn mặc định) -->
 <div id="mobile-nav" class="mobile-nav">
-<div class="mobile-nav-header">
-<img src="images/Logo ECO web.png" alt="Logo" class="mobile-nav-logo">
-<button id="mobile-nav-close" class="mobile-nav-close">&times;</button>
-</div>
-<ul>
-<li><a href="index.html">Trang Chủ</a></li>
-<li><a href="pricelist.html">Bảng Giá</a></li>
-<li><a href="diadiem.html">Địa Điểm</a></li>
-<li><a href="about.html">Về Chúng Tôi</a></li>
-<li class="divider"></li>
-<li><a href="post-ad.html" class="btn btn-post">Đăng bán</a></li>
-<li><a href="Account.html">Tài khoản của tôi</a></li>
-</ul>
+    <div class="mobile-nav-header">
+        <span class="mobile-nav-title">MENU</span>
+        <button id="mobile-nav-close" class="mobile-nav-close">&times;</button>
+    </div>
+    <ul>
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="diadiem.html">Điểm Bán Gần Đây</a></li>
+        <li><a href="pricelist.html">Bảng Giá</a></li>
+        <li><a href="about.html">Về Ecocycle</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Phế liệu kim loại</a></li>
+        <li><a href="#">Phế liệu giấy</a></li>
+        <li><a href="#">Phế liệu nhựa</a></li>
+    </ul>
 </div>
 <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
