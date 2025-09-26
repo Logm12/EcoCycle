@@ -325,3 +325,29 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeGlobalSearch();
 
 });
+// =============================================
+// ========== LOGIC FOR MOBILE NAVIGATION ==========
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('mobile-nav-toggle');
+    const closeButton = document.getElementById('mobile-nav-close');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (toggleButton && mobileNav) {
+        // Mở menu
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.add('mobile-nav-active');
+        });
+
+        // Đóng menu bằng nút close
+        closeButton.addEventListener('click', () => {
+            document.body.classList.remove('mobile-nav-active');
+        });
+
+        // Đóng menu bằng cách bấm vào lớp phủ
+        overlay.addEventListener('click', () => {
+            document.body.classList.remove('mobile-nav-active');
+        });
+    }
+});
