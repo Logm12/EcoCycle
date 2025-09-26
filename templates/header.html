@@ -1,4 +1,4 @@
-<!-- ==================== HEADER ==================== -->
+<!-- ==================== HEADER (SỬA LẠI) ==================== -->
 <header id="main-header">
     <!-- PART 1: TOP BAR -->
     <div class="header-top">
@@ -22,23 +22,25 @@
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
-            <!-- User Actions -->
-            <div class="user-actions">
-                <!-- CHỈNH SỬA: Thêm thẻ <span> quanh chữ "Đăng bán" -->
-                <a href="post-ad.html" class="btn btn-post">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Đăng bán</span>
-                </a>
-                <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> <span>0 đ</span></a>
-                <div id="auth-status">
-                    <a href="Account.html">Đăng nhập / Đăng ký</a>
+            <!-- SỬA LẠI: Nhóm các hành động vào một div -->
+            <div class="header-actions">
+                <!-- User Actions -->
+                <div class="user-actions">
+                    <a href="post-ad.html" class="btn btn-post">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Đăng bán</span>
+                    </a>
+                    <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> <span>0 đ</span></a>
+                    <div id="auth-status">
+                        <a href="Account.html">Đăng nhập / Đăng ký</a>
+                    </div>
                 </div>
+                
+                <!-- Nút Hamburger cho Mobile -->
+                <button class="mobile-nav-toggle" aria-label="Mở menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
-            
-            <!-- Nút Hamburger cho Mobile -->
-            <button class="mobile-nav-toggle" aria-label="Mở menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
         </div>
     </div>
 
