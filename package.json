@@ -4,6 +4,10 @@
     "mime": "^4.1.0"
   },
   "devDependencies": {
-    "@types/node": "^24.5.2"
+    "@types/node": "^24.5.2",
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "start": "http-server ."
   }
 }

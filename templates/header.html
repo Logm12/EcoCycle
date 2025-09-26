@@ -24,15 +24,19 @@
 
             <!-- User Actions -->
             <div class="user-actions">
-                <a href="post-ad.html" class="btn btn-post"><i class="fa-solid fa-plus"></i> Đăng bán</a>
-                <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> 0 đ</a>
+                <!-- CHỈNH SỬA: Thêm thẻ <span> quanh chữ "Đăng bán" -->
+                <a href="post-ad.html" class="btn btn-post">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Đăng bán</span>
+                </a>
+                <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> <span>0 đ</span></a>
                 <div id="auth-status">
                     <a href="Account.html">Đăng nhập / Đăng ký</a>
                 </div>
             </div>
             
             <!-- Nút Hamburger cho Mobile -->
-            <button id="mobile-nav-toggle" class="mobile-nav-toggle">
+            <button class="mobile-nav-toggle" aria-label="Mở menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -61,22 +65,3 @@
         </div>
     </div>
 </header>
-
-<!-- ==================== MOBILE MENU ==================== -->
-<div id="mobile-nav" class="mobile-nav">
-    <div class="mobile-nav-header">
-        <span class="mobile-nav-title">MENU</span>
-        <button id="mobile-nav-close" class="mobile-nav-close">&times;</button>
-    </div>
-    <ul>
-        <li><a href="index.html">Trang Chủ</a></li>
-        <li><a href="diadiem.html">Điểm Bán Gần Đây</a></li>
-        <li><a href="pricelist.html">Bảng Giá</a></li>
-        <li><a href="about.html">Về Ecocycle</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Phế liệu kim loại</a></li>
-        <li><a href="#">Phế liệu giấy</a></li>
-        <li><a href="#">Phế liệu nhựa</a></li>
-    </ul>
-</div>
-<div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
