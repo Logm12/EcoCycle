@@ -77,67 +77,141 @@ ul {
 /* ============================================= */
 
 #main-header {
-    background-color: #fff;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-#main-header .container {
+/* --- Part 1: Top Bar --- */
+.header-top {
+    background-color: var(--primary-color);
+    color: var(--white); 
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+.header-top .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 25px;
+}
+.header-top .container span i {
+    margin-right: 8px;
+}
+
+/* --- Part 2: Main Bar --- */
+.header-main .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    padding: 15px;
+    gap: 20px;
 }
-
 .logo img {
-    height: 45px;
+    height: 50px;
+    display: block;
+}
+.search-bar {
+    flex-grow: 1; /* Cho phép thanh tìm kiếm co giãn */
+    max-width: 500px;
+    display: flex;
+}
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+}
+.search-bar button {
+    padding: 0 15px;
+    border: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0; /* Ngăn các nút bị co lại */
+}
+.user-actions .btn-post {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+.user-actions .btn-post:hover {
+    background-color: #e0a800;
+}
+.user-actions .cart-link, #auth-status a {
+    color: var(--text-color);
+    font-weight: 500;
+    white-space: nowrap;
+}
+#auth-status a:hover {
+    color: var(--primary-color);
 }
 
-/* --- Desktop Navigation --- */
+/* --- Part 3: Navigation Bar --- */
+.header-nav {
+    border-top: 1px solid var(--border-color);
+}
+.header-nav .container {
+    display: flex;
+    justify-content: center; /* Căn giữa thanh nav */
+}
 .main-nav ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 15px; /* Khoảng cách giữa các mục menu */
 }
-
 .main-nav ul li a {
     display: flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa icon và chữ */
-    padding: 25px 15px;
+    gap: 8px;
+    padding: 15px 20px;
     color: var(--text-color);
-    font-weight: 700; /* Chữ đậm */
+    font-weight: 700;
     font-size: 0.9rem;
-    text-transform: uppercase; /* Chữ in hoa */
-    transition: color 0.3s ease, border-color 0.3s ease;
-    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
     position: relative;
 }
-
 .main-nav ul li a:hover {
     color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
 }
-
 .main-nav ul li a.active {
     color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+}
+.main-nav ul li a.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom: -1px;
+    left: 0;
 }
 
 /* --- Dropdown Menu --- */
 .dropdown {
     position: relative;
 }
-
 .dropdown .dropdown-icon {
     font-size: 0.7rem;
 }
-
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -151,18 +225,17 @@ ul {
     padding: 10px 0;
     z-index: 1001;
 }
-
 .dropdown:hover .dropdown-menu {
     display: block;
 }
-
 .dropdown-menu li a {
     padding: 12px 20px;
-    border-bottom: none !important; /* Ghi đè border bottom */
     font-weight: 500;
     text-transform: none;
 }
-
+.dropdown-menu li a::after {
+    display: none !important; /* Ẩn gạch chân active cho menu con */
+}
 /* ==================== HERO SECTION ==================== */
 .hero {
     background: 
